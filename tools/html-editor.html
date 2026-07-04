@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>HTML 편집기 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+
+background:#f5f6fa;
+
+padding-top:70px;
+
+}
+
+.editor-card{
+
+border-radius:20px;
+
+}
+
+textarea{
+
+resize:none;
+
+font-family:Consolas,monospace;
+
+font-size:15px;
+
+height:500px;
+
+}
+
+#preview{
+
+width:100%;
+
+height:500px;
+
+border:1px solid #dee2e6;
+
+border-radius:10px;
+
+background:white;
+
+}
+
+.nav-pills .nav-link{
+
+font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div
+class="collapse navbar-collapse"
+id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a
+class="nav-link"
+href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a
+class="nav-link active">
+
+HTML 편집기
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow editor-card">
+
+<div class="card-body">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-code-slash"></i>
+
+HTML 편집기
+
+</h2>
+
+<div class="row g-2 mb-3">
+
+<div class="col-md-2">
+
+<button
+id="runBtn"
+class="btn btn-success w-100">
+
+<i class="bi bi-play-fill"></i>
+
+실행
+
+</button>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+id="newBtn"
+class="btn btn-warning w-100">
+
+새 문서
+
+</button>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+id="copyBtn"
+class="btn btn-primary w-100">
+
+복사
+
+</button>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+id="downloadBtn"
+class="btn btn-info w-100">
+
+다운로드
+
+</button>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+id="exampleBtn"
+class="btn btn-secondary w-100">
+
+예제
+
+</button>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+id="fullscreenBtn"
+class="btn btn-dark w-100">
+
+전체화면
+
+</button>
+
+</div>
+
+</div>
+
+<ul
+class="nav nav-pills mb-3"
+id="editorTabs">
+
+<li class="nav-item">
+
+<button
+class="nav-link active"
+data-bs-toggle="pill"
+data-bs-target="#htmlTab">
+
+HTML
+
+</button>
+
+</li>
+
+<li class="nav-item">
+
+<button
+class="nav-link"
+data-bs-toggle="pill"
+data-bs-target="#cssTab">
+
+CSS
+
+</button>
+
+</li>
+
+<li class="nav-item">
+
+<button
+class="nav-link"
+data-bs-toggle="pill"
+data-bs-target="#jsTab">
+
+JavaScript
+
+</button>
+
+</li>
+
+</ul>
+
+<div class="row">
+
+<div class="col-lg-6">
+
+<div class="tab-content">
+
+<div
+class="tab-pane fade show active"
+id="htmlTab">
+
+<textarea
+id="htmlCode"
+class="form-control"
+spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+<title>미리보기</title>
+</head>
+<body>
+
+<h1>Hello World!</h1>
+
+<p>HTML Editor</p>
+
+</body>
+</html></textarea>
+
+</div>
+
+<div
+class="tab-pane fade"
+id="cssTab">
+
+<textarea
+id="cssCode"
+class="form-control"
+spellcheck="false">body{
+
+font-family:Arial;
+
+padding:20px;
+
+background:#ffffff;
+
+}
+
+h1{
+
+color:#0d6efd;
+
+}</textarea>
+
+</div>
+
+<div
+class="tab-pane fade"
+id="jsTab">
+
+<textarea
+id="jsCode"
+class="form-control"
+spellcheck="false">console.log("Hello Online Tools");</textarea>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<iframe
+id="preview"
+title="미리보기"></iframe>
+</div>
+
+</div>
+
+<hr class="my-4">
+
+<div class="row g-3">
+
+<div class="col-md-3">
+
+<div class="form-check form-switch">
+
+<input
+class="form-check-input"
+type="checkbox"
+id="autoRun"
+checked>
+
+<label
+class="form-check-label"
+for="autoRun">
+
+자동 실행
+
+</label>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<input
+type="file"
+id="fileInput"
+accept=".html,.htm"
+class="form-control">
+
+</div>
+
+<div class="col-md-3">
+
+<select
+id="fontSize"
+class="form-select">
+
+<option value="14">14px</option>
+
+<option value="15" selected>15px</option>
+
+<option value="16">16px</option>
+
+<option value="18">18px</option>
+
+<option value="20">20px</option>
+
+<option value="24">24px</option>
+
+</select>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="clearStorageBtn"
+class="btn btn-danger w-100">
+
+저장 데이터 삭제
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   요소
+=========================== */
+
+const htmlCode=document.getElementById("htmlCode");
+const cssCode=document.getElementById("cssCode");
+const jsCode=document.getElementById("jsCode");
+
+const preview=document.getElementById("preview");
+
+const autoRun=document.getElementById("autoRun");
+
+const fileInput=document.getElementById("fileInput");
+
+const fontSize=document.getElementById("fontSize");
+
+/* ===========================
+   기본 예제
+=========================== */
+
+const defaultHTML=`<!DOCTYPE html>
+<html>
+<head>
+<title>HTML Editor</title>
+</head>
+<body>
+
+<h1>Hello World!</h1>
+
+<p>Online Tools HTML Editor</p>
+
+</body>
+</html>`;
+
+const defaultCSS=`body{
+font-family:Arial,sans-serif;
+padding:20px;
+background:#ffffff;
+}
+
+h1{
+color:#0d6efd;
+}`;
+
+const defaultJS=`console.log("Hello Online Tools");`;
+/* ===========================
+   미리보기 실행
+=========================== */
+
+function runCode(){
+
+    const html = htmlCode.value;
+    const css = cssCode.value;
+    const js = jsCode.value;
+
+    const source = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+${css}
+</style>
+</head>
+<body>
+
+${html}
+
+<script>
+${js}
+<\/script>
+
+</body>
+</html>`;
+
+    preview.srcdoc = source;
+
+    localStorage.setItem("editor-html", html);
+    localStorage.setItem("editor-css", css);
+    localStorage.setItem("editor-js", js);
+
+}
+
+/* ===========================
+   자동 실행
+=========================== */
+
+function autoRunEditor(){
+
+    if(autoRun.checked){
+
+        runCode();
+
+    }
+
+}
+
+htmlCode.addEventListener("input", autoRunEditor);
+cssCode.addEventListener("input", autoRunEditor);
+jsCode.addEventListener("input", autoRunEditor);
+
+/* ===========================
+   실행 버튼
+=========================== */
+
+document
+.getElementById("runBtn")
+.addEventListener("click", runCode);
+
+/* ===========================
+   새 문서
+=========================== */
+
+document
+.getElementById("newBtn")
+.addEventListener("click", function(){
+
+    if(!confirm("새 문서를 만드시겠습니까?")) return;
+
+    htmlCode.value = defaultHTML;
+    cssCode.value = defaultCSS;
+    jsCode.value = defaultJS;
+
+    runCode();
+
+});
+
+/* ===========================
+   예제 불러오기
+=========================== */
+
+document
+.getElementById("exampleBtn")
+.addEventListener("click", function(){
+
+htmlCode.value=`<div class="container">
+
+<h1 class="text-primary">
+
+Bootstrap Example
+
+</h1>
+
+<button class="btn btn-success">
+
+클릭
+
+</button>
+
+</div>`;
+
+cssCode.value=`body{
+
+padding:30px;
+
+font-family:Arial;
+
+}`;
+
+jsCode.value=`document.querySelector("button")
+.onclick=function(){
+
+alert("안녕하세요!");
+
+};`;
+
+runCode();
+
+});
+
+/* ===========================
+   복사
+=========================== */
+
+document
+.getElementById("copyBtn")
+.addEventListener("click", async function(){
+
+    try{
+
+        await navigator.clipboard.writeText(
+
+htmlCode.value +
+
+"\n\n<style>\n"+
+
+cssCode.value +
+
+"\n</style>\n\n<script>\n"+
+
+jsCode.value +
+
+"\n<\/script>"
+
+        );
+
+        alert("복사되었습니다.");
+
+    }catch{
+
+        alert("복사 실패");
+
+    }
+
+});
+
+/* ===========================
+   HTML 다운로드
+=========================== */
+
+document
+.getElementById("downloadBtn")
+.addEventListener("click", function(){
+
+    const html=`<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+
+${cssCode.value}
+
+</style>
+</head>
+<body>
+
+${htmlCode.value}
+
+<script>
+
+${jsCode.value}
+
+<\/script>
+
+</body>
+</html>`;
+
+    const blob=new Blob([html],{
+
+        type:"text/html"
+
+    });
+
+    const url=URL.createObjectURL(blob);
+
+    const a=document.createElement("a");
+
+    a.href=url;
+
+    a.download="index.html";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+});
+
+/* ===========================
+   HTML 파일 열기
+=========================== */
+
+fileInput.addEventListener("change",function(){
+
+    const file=this.files[0];
+
+    if(!file) return;
+
+    const reader=new FileReader();
+
+    reader.onload=function(){
+
+        htmlCode.value=reader.result;
+
+        runCode();
+
+    };
+
+    reader.readAsText(file,"UTF-8");
+
+});
+
+/* ===========================
+   글꼴 크기
+=========================== */
+
+fontSize.addEventListener("change",function(){
+
+    htmlCode.style.fontSize=this.value+"px";
+    cssCode.style.fontSize=this.value+"px";
+    jsCode.style.fontSize=this.value+"px";
+
+});
+
+/* ===========================
+   저장 데이터 삭제
+=========================== */
+
+document
+.getElementById("clearStorageBtn")
+.addEventListener("click",function(){
+
+    if(!confirm("저장된 데이터를 삭제하시겠습니까?")) return;
+
+    localStorage.removeItem("editor-html");
+    localStorage.removeItem("editor-css");
+    localStorage.removeItem("editor-js");
+
+    alert("삭제되었습니다.");
+
+});
+
+/* ===========================
+   전체화면
+=========================== */
+
+document
+.getElementById("fullscreenBtn")
+.addEventListener("click",function(){
+
+    if(preview.requestFullscreen){
+
+        preview.requestFullscreen();
+
+    }
+
+});
+
+/* ===========================
+   저장된 코드 복원
+=========================== */
+
+htmlCode.value=
+localStorage.getItem("editor-html")||defaultHTML;
+
+cssCode.value=
+localStorage.getItem("editor-css")||defaultCSS;
+
+jsCode.value=
+localStorage.getItem("editor-js")||defaultJS;
+
+/* ===========================
+   최초 실행
+=========================== */
+
+runCode();
+
+</script>
+
+</body>
+
+</html>
