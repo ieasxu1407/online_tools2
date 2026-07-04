@@ -1,0 +1,469 @@
+/* ==========================
+   Online Tools - style.css
+   Bootstrap 5 Theme
+========================== */
+
+:root{
+
+    --primary:#0d6efd;
+    --success:#198754;
+    --danger:#dc3545;
+    --warning:#ffc107;
+    --info:#0dcaf0;
+    --dark:#212529;
+    --light:#f8f9fa;
+
+    --radius:16px;
+
+}
+
+/* -------------------- */
+
+body{
+
+    background:#f4f6f9;
+    font-family:"Segoe UI",sans-serif;
+
+    padding-top:70px;
+
+    transition:.3s;
+
+}
+
+/* -------------------- */
+
+.navbar{
+
+    background:#111!important;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
+
+}
+
+.navbar-brand{
+
+    font-weight:bold;
+
+    font-size:22px;
+
+}
+
+.nav-link{
+
+    transition:.25s;
+
+}
+
+.nav-link:hover{
+
+    color:#ffffff!important;
+
+}
+
+/* -------------------- */
+
+.dropdown-menu{
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2b2b2b;
+
+}
+
+.dropdown-item{
+
+    color:white;
+
+}
+
+.dropdown-item:hover{
+
+    background:#3b3b3b;
+
+    color:white;
+
+}
+
+/* -------------------- */
+
+.hero{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:60px;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+}
+
+/* -------------------- */
+
+.search-box{
+
+    max-width:700px;
+
+    margin:auto;
+
+}
+
+/* -------------------- */
+
+.card{
+
+    border-radius:var(--radius);
+
+}
+
+.tool-card{
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.tool-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.2);
+
+}
+
+.tool-card i{
+
+    font-size:55px;
+
+}
+
+/* -------------------- */
+
+.card-title{
+
+    font-weight:700;
+
+}
+
+.card-text{
+
+    opacity:.9;
+
+}
+
+/* -------------------- */
+
+footer{
+
+    background:#111;
+
+    color:white;
+
+    padding:50px 0;
+
+    margin-top:80px;
+
+}
+
+footer a{
+
+    color:white;
+
+}
+
+footer a:hover{
+
+    color:#0dcaf0;
+
+}
+
+/* -------------------- */
+
+.btn{
+
+    border-radius:10px;
+
+}
+
+/* -------------------- */
+
+.table{
+
+    background:white;
+
+}
+
+/* -------------------- */
+
+.form-control{
+
+    border-radius:10px;
+
+}
+
+.form-select{
+
+    border-radius:10px;
+
+}
+
+/* -------------------- */
+
+textarea{
+
+    resize:vertical;
+
+}
+
+/* -------------------- */
+
+.tool-icon{
+
+    width:70px;
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:auto;
+
+    border-radius:50%;
+
+}
+
+/* -------------------- */
+
+.category-title{
+
+    margin-top:60px;
+
+    margin-bottom:20px;
+
+    font-weight:bold;
+
+}
+
+/* -------------------- */
+
+.badge-tool{
+
+    font-size:13px;
+
+}
+
+/* -------------------- */
+
+.notice-card{
+
+    border-left:5px solid var(--primary);
+
+}
+
+/* -------------------- */
+
+.dark-mode{
+
+    background:#1b1b1b!important;
+
+    color:white!important;
+
+}
+
+.dark-mode .hero{
+
+    background:#2b2b2b;
+
+}
+
+.dark-mode .card{
+
+    background:#343434;
+
+    color:white;
+
+}
+
+.dark-mode footer{
+
+    background:#000;
+
+}
+
+.dark-mode .table{
+
+    color:white;
+
+    background:#2f2f2f;
+
+}
+
+.dark-mode .form-control{
+
+    background:#2d2d2d;
+
+    color:white;
+
+}
+
+.dark-mode .form-select{
+
+    background:#2d2d2d;
+
+    color:white;
+
+}
+
+.dark-mode textarea{
+
+    background:#2d2d2d;
+
+    color:white;
+
+}
+
+/* -------------------- */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#888;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#666;
+
+}
+
+/* -------------------- */
+
+@media(max-width:992px){
+
+.hero{
+
+padding:35px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.tool-card{
+
+margin-bottom:15px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.hero{
+
+padding:25px;
+
+}
+
+.hero h1{
+
+font-size:28px;
+
+}
+
+.tool-card i{
+
+font-size:42px;
+
+}
+
+}
+
+/* ==========================
+   Color Cards
+========================== */
+
+.bg-purple{
+
+    background:#6f42c1!important;
+
+    color:white;
+
+}
+
+.bg-orange{
+
+    background:#fd7e14!important;
+
+    color:white;
+
+}
+
+.bg-pink{
+
+    background:#e83e8c!important;
+
+    color:white;
+
+}
+
+.bg-indigo{
+
+    background:#6610f2!important;
+
+    color:white;
+
+}
+
+.bg-brown{
+
+    background:#795548!important;
+
+    color:white;
+
+}
+
+.bg-gray{
+
+    background:#6c757d!important;
+
+    color:white;
+
+}
+
+.bg-cyan{
+
+    background:#20c997!important;
+
+    color:white;
+
+}
+
+.bg-teal{
+
+    background:#198754!important;
+
+    color:white;
+
+}
