@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>해시 생성기 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+    background:#f5f6fa;
+    padding-top:70px;
+}
+
+.tool-card{
+    max-width:1200px;
+    margin:auto;
+    border-radius:20px;
+}
+
+textarea{
+    min-height:220px;
+    resize:vertical;
+    font-family:Consolas,monospace;
+}
+
+.result-box{
+    min-height:120px;
+    background:#f8f9fa;
+    border:2px solid #dee2e6;
+    border-radius:12px;
+    padding:15px;
+    font-family:Consolas,monospace;
+    word-break:break-all;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a class="nav-link" href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active">
+
+해시 생성기
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow tool-card">
+
+<div class="card-body">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-shield-lock"></i>
+
+해시 생성기
+
+</h2>
+
+<div class="row g-3">
+
+<div class="col-lg-8">
+
+<label class="form-label">
+
+입력 문자열
+
+</label>
+
+<textarea
+id="inputText"
+class="form-control"
+placeholder="여기에 문자열을 입력하세요."></textarea>
+
+</div>
+
+<div class="col-lg-4">
+
+<label class="form-label">
+
+알고리즘
+
+</label>
+
+<select
+id="algorithm"
+class="form-select">
+
+<option>SHA-1</option>
+
+<option selected>SHA-256</option>
+
+<option>SHA-384</option>
+
+<option>SHA-512</option>
+
+</select>
+
+<div class="d-grid gap-2 mt-3">
+
+<button
+id="generateBtn"
+class="btn btn-success">
+
+해시 생성
+
+</button>
+
+<button
+id="copyBtn"
+class="btn btn-primary">
+
+결과 복사
+
+</button>
+
+<button
+id="clearBtn"
+class="btn btn-danger">
+
+입력 지우기
+
+</button>
+
+<button
+id="sampleBtn"
+class="btn btn-warning">
+
+샘플 입력
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<label class="form-label">
+
+생성 결과
+
+</label>
+
+<div
+id="resultBox"
+class="result-box">
+
+결과가 여기에 표시됩니다.
+
+</div>
+<hr>
+
+<div class="row g-3">
+
+<div class="col-md-4">
+
+<label class="form-label">
+
+파일 해시 계산
+
+</label>
+
+<input
+type="file"
+id="fileInput"
+class="form-control">
+
+</div>
+
+<div class="col-md-4 d-grid">
+
+<label class="form-label">&nbsp;</label>
+
+<button
+id="downloadBtn"
+class="btn btn-secondary">
+
+TXT 저장
+
+</button>
+
+</div>
+
+<div class="col-md-4 d-grid">
+
+<label class="form-label">&nbsp;</label>
+
+<button
+id="clearHistoryBtn"
+class="btn btn-outline-danger">
+
+기록 삭제
+
+</button>
+
+</div>
+
+</div>
+
+<hr>
+
+<h5>
+
+최근 생성 기록
+
+</h5>
+
+<div
+id="historyList"
+class="border rounded p-3"
+style="height:220px;overflow:auto;">
+
+<div class="text-muted">
+
+기록이 없습니다.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   요소
+=========================== */
+
+const inputText=document.getElementById("inputText");
+const algorithm=document.getElementById("algorithm");
+const resultBox=document.getElementById("resultBox");
+
+const generateBtn=document.getElementById("generateBtn");
+const copyBtn=document.getElementById("copyBtn");
+const clearBtn=document.getElementById("clearBtn");
+const sampleBtn=document.getElementById("sampleBtn");
+
+const fileInput=document.getElementById("fileInput");
+
+const historyList=document.getElementById("historyList");
+
+/* ===========================
+   LocalStorage
+=========================== */
+
+let historyData=JSON.parse(
+
+localStorage.getItem("hashHistory")||"[]"
+
+);
+
+/* ===========================
+   HEX 변환
+=========================== */
+
+function bufferToHex(buffer){
+
+return [...new Uint8Array(buffer)]
+
+.map(b=>b.toString(16).padStart(2,"0"))
+
+.join("");
+
+}
+
+/* ===========================
+   SHA 생성
+=========================== */
+
+async function createHash(text){
+
+const encoder=new TextEncoder();
+
+const data=encoder.encode(text);
+
+const hash=await crypto.subtle.digest(
+
+algorithm.value,
+
+data
+
+);
+
+return bufferToHex(hash);
+
+}
+
+/* ===========================
+   파일 SHA 생성
+=========================== */
+
+async function createFileHash(file){
+
+const buffer=await file.arrayBuffer();
+
+const hash=await crypto.subtle.digest(
+
+algorithm.value,
+
+buffer
+
+);
+
+return bufferToHex(hash);
+
+}
+
+/* ===========================
+   기록 출력
+=========================== */
+
+function renderHistory(){
+
+historyList.innerHTML="";
+
+if(historyData.length===0){
+
+historyList.innerHTML=
+
+'<div class="text-muted">기록이 없습니다.</div>';
+
+return;
+
+}
+
+historyData.forEach(item=>{
+
+historyList.innerHTML+=`
+
+<div class="border-bottom py-2">
+
+<div>
+
+<strong>${item.algorithm}</strong>
+
+</div>
+
+<div
+style="font-family:Consolas;font-size:13px;word-break:break-all;">
+
+${item.hash}
+
+</div>
+
+<small class="text-muted">
+
+${item.time}
+
+</small>
+
+</div>
+
+`;
+
+});
+
+}
+/* ===========================
+   문자열 해시 생성
+=========================== */
+
+async function generateHash(){
+
+    const text=inputText.value;
+
+    if(text.trim()===""){
+
+        resultBox.textContent="문자열을 입력하세요.";
+
+        return;
+
+    }
+
+    try{
+
+        const hash=await createHash(text);
+
+        resultBox.textContent=hash;
+
+        historyData.unshift({
+
+            algorithm:algorithm.value,
+
+            hash:hash,
+
+            time:new Date().toLocaleString()
+
+        });
+
+        if(historyData.length>20){
+
+            historyData.length=20;
+
+        }
+
+        localStorage.setItem(
+
+            "hashHistory",
+
+            JSON.stringify(historyData)
+
+        );
+
+        renderHistory();
+
+    }catch(e){
+
+        resultBox.textContent="해시 생성 실패";
+
+        console.error(e);
+
+    }
+
+}
+
+/* ===========================
+   파일 해시 생성
+=========================== */
+
+fileInput.addEventListener("change",async function(){
+
+    const file=this.files[0];
+
+    if(!file) return;
+
+    try{
+
+        resultBox.textContent="계산 중...";
+
+        const hash=await createFileHash(file);
+
+        resultBox.textContent=hash;
+
+        historyData.unshift({
+
+            algorithm:algorithm.value+" (FILE)",
+
+            hash:hash,
+
+            time:new Date().toLocaleString()
+
+        });
+
+        if(historyData.length>20){
+
+            historyData.length=20;
+
+        }
+
+        localStorage.setItem(
+
+            "hashHistory",
+
+            JSON.stringify(historyData)
+
+        );
+
+        renderHistory();
+
+    }catch(e){
+
+        resultBox.textContent="파일 해시 생성 실패";
+
+        console.error(e);
+
+    }
+
+});
+
+/* ===========================
+   결과 복사
+=========================== */
+
+copyBtn.addEventListener("click",async function(){
+
+    if(resultBox.textContent==="결과가 여기에 표시됩니다."){
+
+        return;
+
+    }
+
+    try{
+
+        await navigator.clipboard.writeText(
+
+            resultBox.textContent
+
+        );
+
+        alert("복사되었습니다.");
+
+    }catch{
+
+        alert("복사에 실패했습니다.");
+
+    }
+
+});
+
+/* ===========================
+   샘플 입력
+=========================== */
+
+sampleBtn.addEventListener("click",function(){
+
+    inputText.value="Hello Online Tools";
+
+    generateHash();
+
+});
+
+/* ===========================
+   입력 지우기
+=========================== */
+
+clearBtn.addEventListener("click",function(){
+
+    inputText.value="";
+
+    resultBox.textContent="결과가 여기에 표시됩니다.";
+
+});
+
+/* ===========================
+   자동 생성
+=========================== */
+
+inputText.addEventListener("input",function(){
+
+    if(inputText.value.trim()===""){
+
+        resultBox.textContent="결과가 여기에 표시됩니다.";
+
+        return;
+
+    }
+
+    generateHash();
+
+});
+/* ===========================
+   TXT 저장
+=========================== */
+
+document
+.getElementById("downloadBtn")
+.addEventListener("click",function(){
+
+    const text=resultBox.textContent.trim();
+
+    if(
+        text==="" ||
+        text==="결과가 여기에 표시됩니다."
+    ){
+        alert("저장할 결과가 없습니다.");
+        return;
+    }
+
+    const blob=new Blob(
+        [text],
+        {type:"text/plain;charset=utf-8"}
+    );
+
+    const url=URL.createObjectURL(blob);
+
+    const a=document.createElement("a");
+
+    a.href=url;
+    a.download="hash.txt";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+
+});
+
+/* ===========================
+   기록 삭제
+=========================== */
+
+document
+.getElementById("clearHistoryBtn")
+.addEventListener("click",function(){
+
+    if(!confirm("최근 생성 기록을 삭제하시겠습니까?")){
+
+        return;
+
+    }
+
+    historyData=[];
+
+    localStorage.removeItem("hashHistory");
+
+    renderHistory();
+
+});
+
+/* ===========================
+   생성 버튼
+=========================== */
+
+generateBtn.addEventListener("click",generateHash);
+
+/* ===========================
+   알고리즘 변경
+=========================== */
+
+algorithm.addEventListener("change",function(){
+
+    if(inputText.value.trim()!==""){
+
+        generateHash();
+
+    }
+
+});
+
+/* ===========================
+   Enter (Ctrl+Enter)
+=========================== */
+
+inputText.addEventListener("keydown",function(e){
+
+    if(e.ctrlKey && e.key==="Enter"){
+
+        e.preventDefault();
+
+        generateHash();
+
+    }
+
+});
+
+/* ===========================
+   최초 실행
+=========================== */
+
+renderHistory();
+
+resultBox.textContent="결과가 여기에 표시됩니다.";
+
+</script>
+
+</body>
+
+</html>
