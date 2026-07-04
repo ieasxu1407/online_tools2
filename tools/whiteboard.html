@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>화이트보드 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+
+background:#f5f6fa;
+
+padding-top:70px;
+
+}
+
+.tool-card{
+
+max-width:1400px;
+
+margin:auto;
+
+border-radius:20px;
+
+}
+
+.toolbar{
+
+background:#ffffff;
+
+border-radius:12px;
+
+padding:15px;
+
+margin-bottom:15px;
+
+}
+
+#board{
+
+width:100%;
+
+height:700px;
+
+background:#1f5130;
+
+border:3px solid #333;
+
+border-radius:12px;
+
+cursor:crosshair;
+
+touch-action:none;
+
+display:block;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand"
+href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div
+class="collapse navbar-collapse"
+id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a
+class="nav-link"
+href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a
+class="nav-link active">
+
+화이트보드
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow tool-card">
+
+<div class="card-body">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-pencil-square"></i>
+
+화이트보드
+
+</h2>
+
+<div class="toolbar">
+
+<div class="row g-3">
+
+<div class="col-md-2">
+
+<label class="form-label">
+
+도구
+
+</label>
+
+<select
+id="tool"
+class="form-select">
+
+<option value="pen">펜</option>
+
+<option value="eraser">지우개</option>
+
+<option value="line">직선</option>
+
+<option value="rect">사각형</option>
+
+<option value="circle">원</option>
+
+<option value="text">텍스트</option>
+
+</select>
+
+</div>
+
+<div class="col-md-2">
+
+<label class="form-label">
+
+색상
+
+</label>
+
+<input
+type="color"
+id="color"
+class="form-control form-control-color"
+value="#ffffff"
+style="width:100%;height:40px;">
+
+</div>
+
+<div class="col-md-2">
+
+<label class="form-label">
+
+굵기
+
+</label>
+
+<input
+type="range"
+id="size"
+class="form-range"
+min="1"
+max="40"
+value="3">
+
+</div>
+
+<div class="col-md-2">
+
+<label class="form-label">
+
+투명도
+
+</label>
+
+<input
+type="range"
+id="opacity"
+class="form-range"
+min="10"
+max="100"
+value="100">
+
+</div>
+
+<div class="col-md-2 d-grid">
+
+<label class="form-label">&nbsp;</label>
+
+<button
+id="undoBtn"
+class="btn btn-warning">
+
+↩ 실행 취소
+
+</button>
+
+</div>
+
+<div class="col-md-2 d-grid">
+
+<label class="form-label">&nbsp;</label>
+
+<button
+id="redoBtn"
+class="btn btn-info">
+
+↪ 다시 실행
+
+</button>
+
+</div>
+
+</div>
+
+<div class="row g-3 mt-2">
+
+<div class="col-md-3 d-grid">
+
+<button
+id="clearBtn"
+class="btn btn-danger">
+
+🗑 전체 지우기
+
+</button>
+
+</div>
+
+<div class="col-md-3 d-grid">
+
+<button
+id="saveBtn"
+class="btn btn-success">
+
+💾 PNG 저장
+
+</button>
+
+</div>
+
+<div class="col-md-3 d-grid">
+
+<button
+id="imageBtn"
+class="btn btn-primary">
+
+🖼 이미지 추가
+
+</button>
+
+<input
+type="file"
+id="imageFile"
+accept="image/*"
+hidden>
+
+</div>
+
+<div class="col-md-3 d-grid">
+
+<button
+id="gridBtn"
+class="btn btn-secondary">
+
+격자 표시
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<canvas id="board"></canvas>
+<div class="mt-3 text-muted text-center">
+
+마우스 또는 터치로 그림을 그릴 수 있습니다.
+텍스트 도구를 선택하면 보드를 클릭하여 글자를 입력할 수 있습니다.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   Canvas 초기화
+=========================== */
+
+const canvas=document.getElementById("board");
+const ctx=canvas.getContext("2d");
+
+function resizeCanvas(){
+
+canvas.width=canvas.clientWidth;
+canvas.height=700;
+
+ctx.fillStyle="#1f5130";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+}
+
+resizeCanvas();
+
+window.addEventListener("resize",resizeCanvas);
+
+/* ===========================
+   요소
+=========================== */
+
+const tool=document.getElementById("tool");
+const color=document.getElementById("color");
+const size=document.getElementById("size");
+const opacity=document.getElementById("opacity");
+
+const imageFile=document.getElementById("imageFile");
+
+/* ===========================
+   상태 변수
+=========================== */
+
+let drawing=false;
+
+let startX=0;
+let startY=0;
+
+let snapshot=null;
+
+let undoStack=[];
+let redoStack=[];
+
+/* ===========================
+   저장
+=========================== */
+
+function saveState(){
+
+redoStack=[];
+
+undoStack.push(
+
+canvas.toDataURL()
+
+);
+
+if(undoStack.length>50){
+
+undoStack.shift();
+
+}
+
+}
+
+/* ===========================
+   좌표
+=========================== */
+
+function getPos(e){
+
+const rect=canvas.getBoundingClientRect();
+
+if(e.touches){
+
+return{
+
+x:e.touches[0].clientX-rect.left,
+
+y:e.touches[0].clientY-rect.top
+
+};
+
+}
+
+return{
+
+x:e.offsetX,
+
+y:e.offsetY
+
+};
+
+}
+
+/* ===========================
+   스타일 적용
+=========================== */
+
+function applyStyle(){
+
+ctx.lineCap="round";
+ctx.lineJoin="round";
+
+ctx.lineWidth=size.value;
+
+ctx.globalAlpha=opacity.value/100;
+
+if(tool.value==="eraser"){
+
+ctx.strokeStyle="#1f5130";
+
+}else{
+
+ctx.strokeStyle=color.value;
+
+}
+
+ctx.fillStyle=color.value;
+
+}
+/* ===========================
+   그리기 시작
+=========================== */
+
+function startDraw(e){
+
+    e.preventDefault();
+
+    applyStyle();
+
+    saveState();
+
+    drawing=true;
+
+    const p=getPos(e);
+
+    startX=p.x;
+    startY=p.y;
+
+    snapshot=ctx.getImageData(0,0,canvas.width,canvas.height);
+
+    if(tool.value==="pen" || tool.value==="eraser"){
+
+        ctx.beginPath();
+        ctx.moveTo(startX,startY);
+
+    }
+
+}
+
+/* ===========================
+   그리기
+=========================== */
+
+function draw(e){
+
+    if(!drawing) return;
+
+    e.preventDefault();
+
+    const p=getPos(e);
+
+    if(tool.value==="pen" || tool.value==="eraser"){
+
+        ctx.lineTo(p.x,p.y);
+        ctx.stroke();
+
+        return;
+
+    }
+
+    ctx.putImageData(snapshot,0,0);
+
+    if(tool.value==="line"){
+
+        ctx.beginPath();
+        ctx.moveTo(startX,startY);
+        ctx.lineTo(p.x,p.y);
+        ctx.stroke();
+
+    }
+
+    if(tool.value==="rect"){
+
+        ctx.strokeRect(
+            startX,
+            startY,
+            p.x-startX,
+            p.y-startY
+        );
+
+    }
+
+    if(tool.value==="circle"){
+
+        const r=Math.sqrt(
+            Math.pow(p.x-startX,2)+
+            Math.pow(p.y-startY,2)
+        );
+
+        ctx.beginPath();
+        ctx.arc(startX,startY,r,0,Math.PI*2);
+        ctx.stroke();
+
+    }
+
+}
+
+/* ===========================
+   종료
+=========================== */
+
+function stopDraw(){
+
+    drawing=false;
+
+}
+
+/* ===========================
+   텍스트
+=========================== */
+
+canvas.addEventListener("click",function(e){
+
+    if(tool.value!=="text") return;
+
+    const text=prompt("텍스트 입력");
+
+    if(!text) return;
+
+    saveState();
+
+    applyStyle();
+
+    const p=getPos(e);
+
+    ctx.font=(Number(size.value)*8)+"px Arial";
+
+    ctx.fillText(text,p.x,p.y);
+
+});
+
+/* ===========================
+   이벤트
+=========================== */
+
+canvas.addEventListener("mousedown",startDraw);
+canvas.addEventListener("mousemove",draw);
+canvas.addEventListener("mouseup",stopDraw);
+canvas.addEventListener("mouseleave",stopDraw);
+
+canvas.addEventListener("touchstart",startDraw,{passive:false});
+canvas.addEventListener("touchmove",draw,{passive:false});
+canvas.addEventListener("touchend",stopDraw);
+
+/* ===========================
+   실행 취소
+=========================== */
+
+document
+.getElementById("undoBtn")
+.onclick=function(){
+
+    if(undoStack.length===0) return;
+
+    redoStack.push(canvas.toDataURL());
+
+    const img=new Image();
+
+    img.onload=function(){
+
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+        ctx.drawImage(img,0,0);
+
+    };
+
+    img.src=undoStack.pop();
+
+};
+
+/* ===========================
+   다시 실행
+=========================== */
+
+document
+.getElementById("redoBtn")
+.onclick=function(){
+
+    if(redoStack.length===0) return;
+
+    undoStack.push(canvas.toDataURL());
+
+    const img=new Image();
+
+    img.onload=function(){
+
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+        ctx.drawImage(img,0,0);
+
+    };
+
+    img.src=redoStack.pop();
+
+};
+
+/* ===========================
+   전체 지우기
+=========================== */
+
+document
+.getElementById("clearBtn")
+.onclick=function(){
+
+    if(!confirm("전체 삭제하시겠습니까?")) return;
+
+    saveState();
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle="#1f5130";
+
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+};
+
+/* ===========================
+   PNG 저장
+=========================== */
+
+document
+.getElementById("saveBtn")
+.onclick=function(){
+
+    const a=document.createElement("a");
+
+    a.href=canvas.toDataURL("image/png");
+
+    a.download="whiteboard.png";
+
+    a.click();
+
+};
+
+/* ===========================
+   이미지 추가
+=========================== */
+
+document
+.getElementById("imageBtn")
+.onclick=function(){
+
+    imageFile.click();
+
+};
+
+imageFile.addEventListener("change",function(){
+
+    const file=this.files[0];
+
+    if(!file) return;
+
+    const img=new Image();
+
+    img.onload=function(){
+
+        saveState();
+
+        ctx.drawImage(img,20,20);
+
+    };
+
+    img.src=URL.createObjectURL(file);
+
+});
+
+/* ===========================
+   격자
+=========================== */
+
+let grid=false;
+
+document
+.getElementById("gridBtn")
+.onclick=function(){
+
+    grid=!grid;
+
+    if(!grid){
+
+        return;
+
+    }
+
+    ctx.save();
+
+    ctx.strokeStyle="rgba(255,255,255,0.15)";
+
+    ctx.lineWidth=1;
+
+    for(let x=0;x<canvas.width;x+=25){
+
+        ctx.beginPath();
+        ctx.moveTo(x,0);
+        ctx.lineTo(x,canvas.height);
+        ctx.stroke();
+
+    }
+
+    for(let y=0;y<canvas.height;y+=25){
+
+        ctx.beginPath();
+        ctx.moveTo(0,y);
+        ctx.lineTo(canvas.width,y);
+        ctx.stroke();
+
+    }
+
+    ctx.restore();
+
+};
+
+/* ===========================
+   최초 스타일 적용
+=========================== */
+
+applyStyle();
+
+</script>
+
+</body>
+</html>
