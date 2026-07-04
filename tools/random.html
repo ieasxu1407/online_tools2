@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>랜덤 추첨기 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+
+background:#f5f6fa;
+
+padding-top:70px;
+
+}
+
+.tool-card{
+
+max-width:1200px;
+
+margin:auto;
+
+border-radius:20px;
+
+}
+
+#resultCard{
+
+display:none;
+
+font-size:32px;
+
+font-weight:bold;
+
+text-align:center;
+
+padding:40px;
+
+border-radius:15px;
+
+background:#198754;
+
+color:white;
+
+margin-top:20px;
+
+animation:fadeIn .5s;
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:scale(.8);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+
+textarea{
+
+resize:none;
+
+height:420px;
+
+font-family:Consolas,monospace;
+
+}
+
+.history-item{
+
+padding:10px;
+
+border-bottom:1px solid #eee;
+
+font-size:14px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand"
+href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div
+class="collapse navbar-collapse"
+id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a
+class="nav-link"
+href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a
+class="nav-link active">
+
+랜덤 추첨기
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow tool-card">
+
+<div class="card-body">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-shuffle"></i>
+
+랜덤 추첨기
+
+</h2>
+
+<div class="row">
+
+<div class="col-lg-6">
+
+<label class="form-label">
+
+추첨 항목
+<small class="text-muted">
+(한 줄에 하나씩 입력)
+</small>
+
+</label>
+
+<textarea
+id="itemList"
+class="form-control"
+placeholder="사과
+바나나
+포도
+딸기
+오렌지"></textarea>
+
+<div class="mt-3">
+
+<span class="badge bg-primary">
+
+항목 수 :
+<span id="itemCount">
+
+0
+
+</span>
+
+</span>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="row g-2">
+
+<div class="col-6">
+
+<button
+id="drawBtn"
+class="btn btn-success w-100">
+
+🎉 1명 추첨
+
+</button>
+
+</div>
+
+<div class="col-6">
+
+<button
+id="shuffleBtn"
+class="btn btn-warning w-100">
+
+🔀 섞기
+
+</button>
+
+</div>
+
+<div class="col-6">
+
+<button
+id="sampleBtn"
+class="btn btn-info w-100">
+
+샘플
+
+</button>
+
+</div>
+
+<div class="col-6">
+
+<button
+id="clearBtn"
+class="btn btn-danger w-100">
+
+모두 지우기
+
+</button>
+
+</div>
+
+<div class="col-6">
+
+<button
+id="copyBtn"
+class="btn btn-primary w-100">
+
+결과 복사
+
+</button>
+
+</div>
+
+<div class="col-6">
+
+<button
+id="downloadBtn"
+class="btn btn-secondary w-100">
+
+TXT 저장
+
+</button>
+
+</div>
+
+</div>
+
+<div id="resultCard">
+
+당첨 결과
+
+</div>
+</div>
+
+</div>
+
+<hr class="my-4">
+
+<div class="row g-3">
+
+<div class="col-md-3">
+
+<label class="form-label">
+
+추첨 인원
+
+</label>
+
+<input
+type="number"
+id="drawCount"
+class="form-control"
+value="1"
+min="1">
+
+</div>
+
+<div class="col-md-3 d-flex align-items-end">
+
+<div class="form-check">
+
+<input
+class="form-check-input"
+type="checkbox"
+id="allowDuplicate">
+
+<label
+class="form-check-label"
+for="allowDuplicate">
+
+중복 허용
+
+</label>
+
+</div>
+
+</div>
+
+<div class="col-md-3 d-flex align-items-end">
+
+<input
+type="file"
+id="fileInput"
+accept=".txt"
+class="form-control">
+
+</div>
+
+<div class="col-md-3 d-flex align-items-end">
+
+<button
+id="clearHistoryBtn"
+class="btn btn-outline-danger w-100">
+
+기록 삭제
+
+</button>
+
+</div>
+
+</div>
+
+<hr>
+
+<h4>
+
+최근 추첨 기록
+
+</h4>
+
+<div
+id="historyList"
+class="border rounded p-3"
+style="max-height:250px;overflow:auto;">
+
+<div class="text-muted">
+
+추첨 기록이 없습니다.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   요소
+=========================== */
+
+const itemList=document.getElementById("itemList");
+const resultCard=document.getElementById("resultCard");
+const itemCount=document.getElementById("itemCount");
+
+const drawCount=document.getElementById("drawCount");
+const allowDuplicate=document.getElementById("allowDuplicate");
+
+const historyList=document.getElementById("historyList");
+
+const fileInput=document.getElementById("fileInput");
+
+/* ===========================
+   기록
+=========================== */
+
+let historyData=JSON.parse(
+
+localStorage.getItem("randomHistory")||"[]"
+
+);
+
+/* ===========================
+   항목 가져오기
+=========================== */
+
+function getItems(){
+
+return itemList.value
+.split("\n")
+.map(v=>v.trim())
+.filter(v=>v.length>0);
+
+}
+
+/* ===========================
+   개수 표시
+=========================== */
+
+function updateCount(){
+
+itemCount.textContent=getItems().length;
+
+}
+
+itemList.addEventListener("input",updateCount);
+
+/* ===========================
+   기록 출력
+=========================== */
+
+function renderHistory(){
+
+historyList.innerHTML="";
+
+if(historyData.length===0){
+
+historyList.innerHTML=
+
+'<div class="text-muted">추첨 기록이 없습니다.</div>';
+
+return;
+
+}
+
+historyData.forEach(function(item){
+
+const div=document.createElement("div");
+
+div.className="history-item";
+
+div.innerHTML=`
+
+<strong>${item.result}</strong>
+
+<br>
+
+<small class="text-muted">
+
+${item.time}
+
+</small>
+
+`;
+
+historyList.appendChild(div);
+
+});
+
+}
+/* ===========================
+   랜덤 추첨
+=========================== */
+
+function drawRandom(){
+
+    let items = getItems();
+
+    if(items.length===0){
+
+        alert("추첨할 항목을 입력하세요.");
+
+        return;
+
+    }
+
+    const count = Math.max(
+        1,
+        parseInt(drawCount.value)||1
+    );
+
+    let result=[];
+
+    if(allowDuplicate.checked){
+
+        for(let i=0;i<count;i++){
+
+            const index=Math.floor(
+                Math.random()*items.length
+            );
+
+            result.push(items[index]);
+
+        }
+
+    }else{
+
+        if(count>items.length){
+
+            alert("추첨 인원이 항목 수보다 많습니다.");
+
+            return;
+
+        }
+
+        let copy=[...items];
+
+        while(result.length<count){
+
+            const index=Math.floor(
+                Math.random()*copy.length
+            );
+
+            result.push(copy.splice(index,1)[0]);
+
+        }
+
+    }
+
+    resultCard.style.display="block";
+
+    resultCard.innerHTML=result.join("<br>");
+
+    historyData.unshift({
+
+        result:result.join(", "),
+
+        time:new Date().toLocaleString()
+
+    });
+
+    if(historyData.length>30){
+
+        historyData.length=30;
+
+    }
+
+    localStorage.setItem(
+
+        "randomHistory",
+
+        JSON.stringify(historyData)
+
+    );
+
+    renderHistory();
+
+}
+
+/* ===========================
+   섞기
+=========================== */
+
+document
+.getElementById("shuffleBtn")
+.addEventListener("click",function(){
+
+    let items=getItems();
+
+    for(let i=items.length-1;i>0;i--){
+
+        const j=Math.floor(Math.random()*(i+1));
+
+        [items[i],items[j]]=[items[j],items[i]];
+
+    }
+
+    itemList.value=items.join("\n");
+
+    updateCount();
+
+});
+
+/* ===========================
+   샘플 데이터
+=========================== */
+
+document
+.getElementById("sampleBtn")
+.addEventListener("click",function(){
+
+itemList.value=`사과
+바나나
+포도
+딸기
+오렌지
+수박
+복숭아
+참외
+키위
+레몬`;
+
+updateCount();
+
+});
+
+/* ===========================
+   모두 지우기
+=========================== */
+
+document
+.getElementById("clearBtn")
+.addEventListener("click",function(){
+
+if(!confirm("모든 항목을 삭제하시겠습니까?")) return;
+
+itemList.value="";
+
+resultCard.style.display="none";
+
+updateCount();
+
+});
+
+/* ===========================
+   결과 복사
+=========================== */
+
+document
+.getElementById("copyBtn")
+.addEventListener("click",async function(){
+
+if(resultCard.style.display==="none"){
+
+alert("추첨 결과가 없습니다.");
+
+return;
+
+}
+
+try{
+
+await navigator.clipboard.writeText(
+
+resultCard.innerText
+
+);
+
+alert("복사되었습니다.");
+
+}catch{
+
+alert("복사 실패");
+
+}
+
+});
+
+/* ===========================
+   TXT 저장
+=========================== */
+
+document
+.getElementById("downloadBtn")
+.addEventListener("click",function(){
+
+const blob=new Blob(
+
+[itemList.value],
+
+{type:"text/plain"}
+
+);
+
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+
+a.href=url;
+
+a.download="random-items.txt";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+});
+
+/* ===========================
+   TXT 불러오기
+=========================== */
+
+fileInput.addEventListener("change",function(){
+
+const file=this.files[0];
+
+if(!file) return;
+
+const reader=new FileReader();
+
+reader.onload=function(){
+
+itemList.value=reader.result;
+
+updateCount();
+
+};
+
+reader.readAsText(file,"UTF-8");
+
+});
+
+/* ===========================
+   기록 삭제
+=========================== */
+
+document
+.getElementById("clearHistoryBtn")
+.addEventListener("click",function(){
+
+if(!confirm("추첨 기록을 삭제하시겠습니까?")) return;
+
+historyData=[];
+
+localStorage.removeItem("randomHistory");
+
+renderHistory();
+
+});
+
+/* ===========================
+   추첨 버튼
+=========================== */
+
+document
+.getElementById("drawBtn")
+.addEventListener("click",drawRandom);
+
+/* ===========================
+   최초 실행
+=========================== */
+
+renderHistory();
+
+updateCount();
+
+</script>
+
+</body>
+</html>
