@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>달력 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+    background:#f5f6fa;
+    padding-top:70px;
+}
+
+.calendar-card{
+    max-width:1200px;
+    margin:auto;
+    border-radius:20px;
+}
+
+.calendar-table{
+    table-layout:fixed;
+}
+
+.calendar-table th{
+
+    text-align:center;
+    background:#212529;
+    color:#fff;
+    padding:12px;
+
+}
+
+.calendar-table td{
+
+    height:110px;
+    vertical-align:top;
+    cursor:pointer;
+    transition:.2s;
+
+}
+
+.calendar-table td:hover{
+
+    background:#f1f3f5;
+
+}
+
+.today{
+
+    background:#fff3cd !important;
+    border:2px solid #ffc107;
+
+}
+
+.selected{
+
+    background:#dbeafe !important;
+
+}
+
+.day-number{
+
+    font-weight:bold;
+    font-size:16px;
+
+}
+
+.memo-preview{
+
+    font-size:12px;
+    color:#6c757d;
+    margin-top:6px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a class="nav-link" href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active">
+
+달력
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow calendar-card">
+
+<div class="card-body">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-calendar3"></i>
+
+달력
+
+</h2>
+
+<div class="row g-3 align-items-center mb-4">
+
+<div class="col-md-2">
+
+<button
+id="prevBtn"
+class="btn btn-secondary w-100">
+
+<i class="bi bi-chevron-left"></i>
+
+이전
+
+</button>
+
+</div>
+
+<div class="col-md-4">
+
+<h4
+id="monthTitle"
+class="text-center mb-0">
+
+2026년 1월
+
+</h4>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+id="nextBtn"
+class="btn btn-secondary w-100">
+
+다음
+
+<i class="bi bi-chevron-right"></i>
+
+</button>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+id="todayBtn"
+class="btn btn-primary w-100">
+
+오늘
+
+</button>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+class="btn btn-success w-100"
+data-bs-toggle="modal"
+data-bs-target="#memoModal">
+
+메모
+
+</button>
+
+</div>
+
+</div>
+
+<div class="table-responsive">
+
+<table class="table table-bordered calendar-table">
+
+<thead>
+
+<tr>
+
+<th class="text-danger">일</th>
+<th>월</th>
+<th>화</th>
+<th>수</th>
+<th>목</th>
+<th>금</th>
+<th class="text-primary">토</th>
+
+</tr>
+
+</thead>
+
+<tbody id="calendarBody">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- 날짜 메모 모달 -->
+
+<div
+class="modal fade"
+id="memoModal"
+tabindex="-1">
+
+<div class="modal-dialog">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+
+날짜 메모
+
+</h5>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal">
+
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="mb-3">
+
+<label class="form-label">
+
+선택한 날짜
+
+</label>
+
+<input
+type="text"
+id="selectedDate"
+class="form-control"
+readonly>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+
+메모
+
+</label>
+
+<textarea
+id="memoText"
+class="form-control"
+rows="6"
+placeholder="메모를 입력하세요..."></textarea>
+
+</div>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+id="deleteMemoBtn"
+class="btn btn-danger">
+
+삭제
+
+</button>
+
+<button
+id="saveMemoBtn"
+class="btn btn-success">
+
+저장
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   변수
+=========================== */
+
+const calendarBody=document.getElementById("calendarBody");
+
+const monthTitle=document.getElementById("monthTitle");
+
+const selectedDate=document.getElementById("selectedDate");
+
+const memoText=document.getElementById("memoText");
+
+let today=new Date();
+
+let currentYear=today.getFullYear();
+
+let currentMonth=today.getMonth();
+
+let selectedKey="";
+
+let memoData=JSON.parse(
+localStorage.getItem("calendarMemo")||"{}"
+);
+
+/* ===========================
+   날짜 키
+=========================== */
+
+function getDateKey(y,m,d){
+
+return y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+
+}
+
+/* ===========================
+   메모 저장
+=========================== */
+
+function saveMemo(){
+
+if(selectedKey==="") return;
+
+memoData[selectedKey]=memoText.value;
+
+localStorage.setItem(
+"calendarMemo",
+JSON.stringify(memoData)
+);
+
+}
+
+/* ===========================
+   메모 삭제
+=========================== */
+
+function deleteMemo(){
+
+if(selectedKey==="") return;
+
+delete memoData[selectedKey];
+
+localStorage.setItem(
+"calendarMemo",
+JSON.stringify(memoData)
+);
+
+memoText.value="";
+
+}
+/* ===========================
+   달력 생성
+=========================== */
+
+function renderCalendar(){
+
+    calendarBody.innerHTML="";
+
+    monthTitle.textContent=
+        currentYear+"년 "+(currentMonth+1)+"월";
+
+    const firstDay=new Date(currentYear,currentMonth,1).getDay();
+
+    const lastDate=new Date(currentYear,currentMonth+1,0).getDate();
+
+    let date=1;
+
+    for(let row=0;row<6;row++){
+
+        const tr=document.createElement("tr");
+
+        for(let col=0;col<7;col++){
+
+            const td=document.createElement("td");
+
+            if(row===0 && col<firstDay){
+
+                td.innerHTML="&nbsp;";
+
+            }else if(date>lastDate){
+
+                td.innerHTML="&nbsp;";
+
+            }else{
+
+                const key=getDateKey(currentYear,currentMonth,date);
+
+                let preview="";
+
+                if(memoData[key]){
+
+                    preview=memoData[key]
+                        .replace(/\n/g," ")
+                        .substring(0,20);
+
+                }
+
+                td.innerHTML=`
+                    <div class="day-number">${date}</div>
+                    <div class="memo-preview">${preview}</div>
+                `;
+
+                if(
+                    currentYear===today.getFullYear() &&
+                    currentMonth===today.getMonth() &&
+                    date===today.getDate()
+                ){
+                    td.classList.add("today");
+                }
+
+                td.addEventListener("click",function(){
+
+                    document
+                    .querySelectorAll("#calendarBody td")
+                    .forEach(cell=>cell.classList.remove("selected"));
+
+                    td.classList.add("selected");
+
+                    selectedKey=key;
+
+                    selectedDate.value=key;
+
+                    memoText.value=memoData[key]||"";
+
+                });
+
+                date++;
+
+            }
+
+            tr.appendChild(td);
+
+        }
+
+        calendarBody.appendChild(tr);
+
+        if(date>lastDate) break;
+
+    }
+
+}
+
+/* ===========================
+   이전 / 다음 달
+=========================== */
+
+document
+.getElementById("prevBtn")
+.addEventListener("click",function(){
+
+    currentMonth--;
+
+    if(currentMonth<0){
+
+        currentMonth=11;
+
+        currentYear--;
+
+    }
+
+    renderCalendar();
+
+});
+
+document
+.getElementById("nextBtn")
+.addEventListener("click",function(){
+
+    currentMonth++;
+
+    if(currentMonth>11){
+
+        currentMonth=0;
+
+        currentYear++;
+
+    }
+
+    renderCalendar();
+
+});
+
+/* ===========================
+   오늘
+=========================== */
+
+document
+.getElementById("todayBtn")
+.addEventListener("click",function(){
+
+    today=new Date();
+
+    currentYear=today.getFullYear();
+
+    currentMonth=today.getMonth();
+
+    renderCalendar();
+
+});
+
+/* ===========================
+   메모 저장
+=========================== */
+
+document
+.getElementById("saveMemoBtn")
+.addEventListener("click",function(){
+
+    saveMemo();
+
+    renderCalendar();
+
+    bootstrap.Modal
+        .getInstance(document.getElementById("memoModal"))
+        .hide();
+
+});
+
+/* ===========================
+   메모 삭제
+=========================== */
+
+document
+.getElementById("deleteMemoBtn")
+.addEventListener("click",function(){
+
+    deleteMemo();
+
+    renderCalendar();
+
+});
+
+/* ===========================
+   최초 실행
+=========================== */
+
+renderCalendar();
+
+</script>
+
+</body>
+</html>
