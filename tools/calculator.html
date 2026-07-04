@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>계산기 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+    background:#f5f6fa;
+    padding-top:70px;
+}
+
+.calculator-card{
+    max-width:480px;
+    margin:auto;
+    border-radius:20px;
+}
+
+#display{
+
+    width:100%;
+    height:90px;
+
+    border:none;
+
+    background:#212529;
+
+    color:#fff;
+
+    text-align:right;
+
+    font-size:2rem;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    outline:none;
+
+}
+
+#history{
+
+    text-align:right;
+
+    color:#6c757d;
+
+    min-height:24px;
+
+    font-size:.95rem;
+
+    margin-bottom:10px;
+
+}
+
+.calc-btn{
+
+    height:65px;
+
+    font-size:1.2rem;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a class="nav-link" href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active">
+
+계산기
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow calculator-card">
+
+<div class="card-body">
+
+<h3 class="text-center mb-4">
+
+<i class="bi bi-calculator"></i>
+
+계산기
+
+</h3>
+
+<div id="history">
+
+&nbsp;
+
+</div>
+
+<input
+
+type="text"
+
+id="display"
+
+value="0"
+
+readonly>
+
+<div class="mt-4">
+
+<div class="row g-2">
+<div class="col-3">
+<button class="btn btn-danger w-100 calc-btn" data-value="C">C</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-warning w-100 calc-btn" data-value="CE">CE</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-warning w-100 calc-btn" data-value="BACK">⌫</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-primary w-100 calc-btn" data-value="/">÷</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value="7">7</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value="8">8</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value="9">9</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-primary w-100 calc-btn" data-value="*">×</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value="4">4</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value="5">5</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value="6">6</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-primary w-100 calc-btn" data-value="-">−</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value="1">1</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value="2">2</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value="3">3</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-primary w-100 calc-btn" data-value="+">＋</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-secondary w-100 calc-btn" data-value="%">%</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value="0">0</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-light w-100 calc-btn" data-value=".">.</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-success w-100 calc-btn" data-value="=">=</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-secondary w-100 calc-btn" data-value="SQRT">√</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-secondary w-100 calc-btn" data-value="SQUARE">x²</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-secondary w-100 calc-btn" data-value="INV">1/x</button>
+</div>
+
+<div class="col-3">
+<button class="btn btn-secondary w-100 calc-btn" data-value="NEG">±</button>
+</div>
+
+</div>
+
+<hr>
+
+<h5>
+
+<i class="bi bi-clock-history"></i>
+
+계산 기록
+
+</h5>
+
+<div
+id="historyList"
+class="border rounded p-2"
+style="height:180px;overflow:auto;">
+
+<div class="text-muted">
+
+계산 기록이 없습니다.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+const display=document.getElementById("display");
+
+const history=document.getElementById("history");
+
+const historyList=document.getElementById("historyList");
+
+const buttons=document.querySelectorAll(".calc-btn");
+
+let expression="";
+
+let records=[];
+
+function updateDisplay(){
+
+display.value=expression||"0";
+
+}
+
+function addHistory(exp,result){
+
+if(records.length===0){
+
+historyList.innerHTML="";
+
+}
+
+const div=document.createElement("div");
+
+div.className="border-bottom py-1";
+
+div.innerHTML=`${exp} = <strong>${result}</strong>`;
+
+historyList.prepend(div);
+
+records.unshift({exp,result});
+
+localStorage.setItem("calculatorHistory",JSON.stringify(records));
+
+}
+/* ===========================
+   계산 처리
+=========================== */
+
+buttons.forEach(function(btn){
+
+    btn.addEventListener("click",function(){
+
+        const value=this.dataset.value;
+
+        switch(value){
+
+            case "C":
+
+                expression="";
+
+                history.textContent="";
+
+                updateDisplay();
+
+                break;
+
+            case "CE":
+
+                expression="";
+
+                updateDisplay();
+
+                break;
+
+            case "BACK":
+
+                expression=expression.slice(0,-1);
+
+                updateDisplay();
+
+                break;
+
+            case "=":
+
+                calculate();
+
+                break;
+
+            case "SQRT":
+
+                if(expression==="") return;
+
+                try{
+
+                    expression=Math.sqrt(eval(expression)).toString();
+
+                    updateDisplay();
+
+                }catch{
+
+                    display.value="오류";
+
+                    expression="";
+
+                }
+
+                break;
+
+            case "SQUARE":
+
+                if(expression==="") return;
+
+                try{
+
+                    expression=Math.pow(eval(expression),2).toString();
+
+                    updateDisplay();
+
+                }catch{
+
+                    display.value="오류";
+
+                    expression="";
+
+                }
+
+                break;
+
+            case "INV":
+
+                if(expression==="") return;
+
+                try{
+
+                    expression=(1/eval(expression)).toString();
+
+                    updateDisplay();
+
+                }catch{
+
+                    display.value="오류";
+
+                    expression="";
+
+                }
+
+                break;
+
+            case "NEG":
+
+                if(expression==="") return;
+
+                try{
+
+                    expression=(-eval(expression)).toString();
+
+                    updateDisplay();
+
+                }catch{
+
+                    display.value="오류";
+
+                    expression="";
+
+                }
+
+                break;
+
+            case "%":
+
+                if(expression==="") return;
+
+                try{
+
+                    expression=(eval(expression)/100).toString();
+
+                    updateDisplay();
+
+                }catch{
+
+                    display.value="오류";
+
+                    expression="";
+
+                }
+
+                break;
+
+            default:
+
+                expression+=value;
+
+                updateDisplay();
+
+        }
+
+    });
+
+});
+
+/* ===========================
+   계산
+=========================== */
+
+function calculate(){
+
+    if(expression==="") return;
+
+    try{
+
+        const exp=expression.replace(/×/g,"*").replace(/÷/g,"/");
+
+        const result=Function('"use strict";return ('+exp+')')();
+
+        history.textContent=expression+" =";
+
+        addHistory(expression,result);
+
+        expression=result.toString();
+
+        updateDisplay();
+
+    }catch{
+
+        display.value="오류";
+
+        expression="";
+
+    }
+
+}
+
+/* ===========================
+   키보드 입력
+=========================== */
+
+document.addEventListener("keydown",function(e){
+
+    if(/[0-9+\-*/.%]/.test(e.key)){
+
+        expression+=e.key;
+
+        updateDisplay();
+
+    }
+
+    else if(e.key==="Enter"){
+
+        e.preventDefault();
+
+        calculate();
+
+    }
+
+    else if(e.key==="Backspace"){
+
+        expression=expression.slice(0,-1);
+
+        updateDisplay();
+
+    }
+
+    else if(e.key==="Delete"){
+
+        expression="";
+
+        updateDisplay();
+
+    }
+
+});
+
+/* ===========================
+   기록 복원
+=========================== */
+
+const saved=JSON.parse(
+
+localStorage.getItem("calculatorHistory")||"[]"
+
+);
+
+if(saved.length){
+
+    historyList.innerHTML="";
+
+    records=saved;
+
+    saved.forEach(function(item){
+
+        const div=document.createElement("div");
+
+        div.className="border-bottom py-1";
+
+        div.innerHTML=`${item.exp} = <strong>${item.result}</strong>`;
+
+        historyList.appendChild(div);
+
+    });
+
+}
+
+/* ===========================
+   초기화
+=========================== */
+
+updateDisplay();
+
+</script>
+
+</body>
+</html>
