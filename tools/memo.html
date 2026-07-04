@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>메모장 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+
+padding-top:70px;
+background:#f5f6fa;
+
+}
+
+.tool-card{
+
+max-width:1100px;
+margin:auto;
+border-radius:20px;
+
+}
+
+textarea{
+
+resize:vertical;
+min-height:420px;
+font-size:16px;
+font-family:Consolas, monospace;
+
+}
+
+.info-box{
+
+background:#f8f9fa;
+border-radius:12px;
+padding:15px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a class="nav-link" href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active">
+
+메모장
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow tool-card">
+
+<div class="card-body p-4">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-journal-text"></i>
+
+메모장
+
+</h2>
+
+<div class="row">
+
+<div class="col-lg-4">
+
+<label class="form-label">
+
+메모 제목
+
+</label>
+
+<input
+
+type="text"
+
+id="memoTitle"
+
+class="form-control"
+
+placeholder="제목을 입력하세요">
+
+<div class="mt-3">
+
+<label class="form-label">
+
+마지막 저장 시간
+
+</label>
+
+<div
+
+id="saveTime"
+
+class="info-box">
+
+저장되지 않음
+
+</div>
+
+</div>
+
+<div class="mt-3">
+
+<label class="form-label">
+
+글자 수
+
+</label>
+
+<div
+
+id="charCount"
+
+class="info-box">
+
+0 글자
+
+</div>
+
+</div>
+
+<div class="mt-3">
+
+<label class="form-label">
+
+줄 수
+
+</label>
+
+<div
+
+id="lineCount"
+
+class="info-box">
+
+1 줄
+
+</div>
+
+</div>
+
+<div class="form-check mt-3">
+
+<input
+
+class="form-check-input"
+
+type="checkbox"
+
+id="autoSave"
+
+checked>
+
+<label class="form-check-label">
+
+자동 저장(LocalStorage)
+
+</label>
+
+</div>
+
+</div>
+
+<div class="col-lg-8">
+
+<label class="form-label">
+
+메모 내용
+
+</label>
+
+<textarea
+
+id="memoContent"
+
+class="form-control"
+
+placeholder="여기에 메모를 입력하세요..."></textarea>
+
+<hr>
+
+<div class="progress">
+
+<div
+
+id="progressBar"
+
+class="progress-bar progress-bar-striped progress-bar-animated"
+
+style="width:0%;">
+
+0%
+
+</div>
+
+</div>
+
+<p
+
+id="statusText"
+
+class="text-center mt-3 text-muted">
+
+대기중
+
+</p>
+</div>
+
+<hr class="my-4">
+
+<div class="row g-3">
+
+<div class="col-md-4">
+
+<button
+id="saveBtn"
+class="btn btn-success w-100">
+
+<i class="bi bi-save"></i>
+
+저장
+
+</button>
+
+</div>
+
+<div class="col-md-4">
+
+<button
+id="downloadBtn"
+class="btn btn-primary w-100">
+
+<i class="bi bi-download"></i>
+
+TXT 다운로드
+
+</button>
+
+</div>
+
+<div class="col-md-4">
+
+<button
+id="openBtn"
+class="btn btn-info w-100">
+
+<i class="bi bi-folder2-open"></i>
+
+TXT 열기
+
+</button>
+
+<input
+type="file"
+id="fileInput"
+accept=".txt"
+hidden>
+
+</div>
+
+<div class="col-md-4">
+
+<button
+id="newBtn"
+class="btn btn-warning w-100">
+
+<i class="bi bi-file-earmark-plus"></i>
+
+새 메모
+
+</button>
+
+</div>
+
+<div class="col-md-4">
+
+<button
+id="clearBtn"
+class="btn btn-danger w-100">
+
+<i class="bi bi-trash"></i>
+
+전체 삭제
+
+</button>
+
+</div>
+
+<div class="col-md-4">
+
+<button
+id="copyBtn"
+class="btn btn-secondary w-100">
+
+<i class="bi bi-clipboard"></i>
+
+전체 복사
+
+</button>
+
+</div>
+
+</div>
+
+<hr class="my-5">
+
+<h4>
+
+<i class="bi bi-clock-history"></i>
+
+최근 저장 정보
+
+</h4>
+
+<div class="table-responsive">
+
+<table class="table table-striped table-hover">
+
+<thead class="table-dark">
+
+<tr>
+
+<th width="70">
+
+번호
+
+</th>
+
+<th>
+
+제목
+
+</th>
+
+<th width="180">
+
+저장 시간
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyTable">
+
+<tr>
+
+<td colspan="3" class="text-center text-muted">
+
+저장된 메모가 없습니다.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   요소
+=========================== */
+
+const memoTitle=document.getElementById("memoTitle");
+const memoContent=document.getElementById("memoContent");
+
+const saveTime=document.getElementById("saveTime");
+const charCount=document.getElementById("charCount");
+const lineCount=document.getElementById("lineCount");
+
+const historyTable=document.getElementById("historyTable");
+
+const progressBar=document.getElementById("progressBar");
+const statusText=document.getElementById("statusText");
+
+let historyIndex=1;
+
+/* ===========================
+   진행상태
+=========================== */
+
+function setProgress(percent,text){
+
+progressBar.style.width=percent+"%";
+
+progressBar.textContent=percent+"%";
+
+statusText.textContent=text;
+
+}
+
+/* ===========================
+   저장기록 추가
+=========================== */
+
+function addHistory(title,time){
+
+if(historyIndex===1){
+
+historyTable.innerHTML="";
+
+}
+
+const tr=document.createElement("tr");
+
+tr.innerHTML=`
+
+<td>${historyIndex}</td>
+
+<td>${title||"(제목 없음)"}</td>
+
+<td>${time}</td>
+
+`;
+
+historyTable.appendChild(tr);
+
+historyIndex++;
+
+}
+/* ===========================
+   글자 수 / 줄 수 갱신
+=========================== */
+
+function updateInfo(){
+
+    const text = memoContent.value;
+
+    charCount.textContent = text.length + " 글자";
+
+    const lines = text === "" ? 1 : text.split("\n").length;
+
+    lineCount.textContent = lines + " 줄";
+
+}
+
+/* ===========================
+   메모 저장
+=========================== */
+
+function saveMemo(){
+
+    const title = memoTitle.value.trim();
+    const content = memoContent.value;
+
+    const now = new Date().toLocaleString();
+
+    if(document.getElementById("autoSave").checked){
+
+        localStorage.setItem("memoTitle", title);
+        localStorage.setItem("memoContent", content);
+        localStorage.setItem("memoTime", now);
+
+    }
+
+    saveTime.textContent = now;
+
+    addHistory(title, now);
+
+    setProgress(100, "저장 완료");
+
+}
+
+document.getElementById("saveBtn").addEventListener("click", saveMemo);
+
+/* ===========================
+   자동 저장
+=========================== */
+
+memoTitle.addEventListener("input", function(){
+
+    updateInfo();
+
+    if(document.getElementById("autoSave").checked){
+
+        saveMemo();
+
+    }
+
+});
+
+memoContent.addEventListener("input", function(){
+
+    updateInfo();
+
+    if(document.getElementById("autoSave").checked){
+
+        saveMemo();
+
+    }
+
+});
+
+/* ===========================
+   TXT 다운로드
+=========================== */
+
+document.getElementById("downloadBtn").addEventListener("click", function(){
+
+    const text =
+`제목 : ${memoTitle.value}
+
+----------------------------------------
+
+${memoContent.value}`;
+
+    const blob = new Blob([text],{
+        type:"text/plain;charset=utf-8"
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+
+    a.download = (memoTitle.value || "memo") + ".txt";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+});
+
+/* ===========================
+   TXT 열기
+=========================== */
+
+document.getElementById("openBtn").addEventListener("click", function(){
+
+    document.getElementById("fileInput").click();
+
+});
+
+document.getElementById("fileInput").addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(){
+
+        memoContent.value = reader.result;
+
+        updateInfo();
+
+    };
+
+    reader.readAsText(file,"UTF-8");
+
+});
+
+/* ===========================
+   새 메모
+=========================== */
+
+document.getElementById("newBtn").addEventListener("click",function(){
+
+    memoTitle.value="";
+
+    memoContent.value="";
+
+    updateInfo();
+
+    setProgress(0,"새 메모");
+
+});
+
+/* ===========================
+   전체 삭제
+=========================== */
+
+document.getElementById("clearBtn").addEventListener("click",function(){
+
+    if(!confirm("메모를 삭제하시겠습니까?")) return;
+
+    memoTitle.value="";
+
+    memoContent.value="";
+
+    localStorage.removeItem("memoTitle");
+    localStorage.removeItem("memoContent");
+    localStorage.removeItem("memoTime");
+
+    saveTime.textContent="저장되지 않음";
+
+    updateInfo();
+
+    setProgress(0,"삭제 완료");
+
+});
+
+/* ===========================
+   전체 복사
+=========================== */
+
+document.getElementById("copyBtn").addEventListener("click",async function(){
+
+    try{
+
+        await navigator.clipboard.writeText(memoContent.value);
+
+        alert("복사되었습니다.");
+
+    }catch{
+
+        alert("복사에 실패했습니다.");
+
+    }
+
+});
+
+/* ===========================
+   Ctrl + S 저장
+=========================== */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.ctrlKey && e.key.toLowerCase()==="s"){
+
+        e.preventDefault();
+
+        saveMemo();
+
+    }
+
+});
+
+/* ===========================
+   저장된 메모 복원
+=========================== */
+
+window.addEventListener("load",function(){
+
+    const title = localStorage.getItem("memoTitle");
+    const content = localStorage.getItem("memoContent");
+    const time = localStorage.getItem("memoTime");
+
+    if(title) memoTitle.value = title;
+
+    if(content) memoContent.value = content;
+
+    if(time){
+
+        saveTime.textContent = time;
+
+        addHistory(title,time);
+
+    }
+
+    updateInfo();
+
+    setProgress(0,"대기중");
+
+});
+
+</script>
+
+</body>
+
+</html>
