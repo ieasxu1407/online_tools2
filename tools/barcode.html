@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>바코드 생성기 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+
+padding-top:70px;
+background:#f5f6fa;
+
+}
+
+.tool-card{
+
+max-width:1100px;
+margin:auto;
+border-radius:20px;
+
+}
+
+#barcode{
+
+min-height:180px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:#fff;
+
+border:2px dashed #ced4da;
+
+border-radius:15px;
+
+padding:20px;
+
+overflow:auto;
+
+}
+
+#barcode svg{
+
+max-width:100%;
+
+height:auto;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a class="nav-link" href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active">
+
+바코드 생성기
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow tool-card">
+
+<div class="card-body p-4">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-upc-scan"></i>
+
+바코드 생성기
+
+</h2>
+
+<div class="row">
+
+<div class="col-lg-5">
+
+<label class="form-label">
+
+바코드 내용
+
+</label>
+
+<input
+
+type="text"
+
+id="barcodeInput"
+
+class="form-control"
+
+placeholder="예: 8801234567890">
+
+<div class="mt-3">
+
+<label class="form-label">
+
+바코드 종류
+
+</label>
+
+<select
+
+id="barcodeType"
+
+class="form-select">
+
+<option value="CODE128" selected>
+
+CODE128
+
+</option>
+
+<option value="EAN13">
+
+EAN-13
+
+</option>
+
+<option value="EAN8">
+
+EAN-8
+
+</option>
+
+<option value="UPC">
+
+UPC
+
+</option>
+
+<option value="CODE39">
+
+CODE39
+
+</option>
+
+<option value="ITF14">
+
+ITF-14
+
+</option>
+
+<option value="MSI">
+
+MSI
+
+</option>
+
+<option value="pharmacode">
+
+Pharmacode
+
+</option>
+
+</select>
+
+</div>
+
+<div class="mt-3">
+
+<label class="form-label">
+
+바코드 높이
+
+</label>
+
+<input
+
+type="range"
+
+class="form-range"
+
+id="barcodeHeight"
+
+min="40"
+
+max="180"
+
+value="100">
+
+<div class="text-center">
+
+<span
+
+id="heightValue"
+
+class="badge bg-primary">
+
+100 px
+
+</span>
+
+</div>
+
+</div>
+
+<div class="form-check mt-3">
+
+<input
+
+class="form-check-input"
+
+type="checkbox"
+
+id="showValue"
+
+checked>
+
+<label class="form-check-label">
+
+값 표시
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input
+
+class="form-check-input"
+
+type="checkbox"
+
+id="saveHistory"
+
+checked>
+
+<label class="form-check-label">
+
+생성 기록 저장
+
+</label>
+
+</div>
+
+</div>
+
+<div class="col-lg-7">
+
+<div id="barcode">
+
+<span class="text-muted">
+
+바코드가 여기에 표시됩니다.
+
+</span>
+
+</div>
+
+<hr>
+
+<div class="progress">
+
+<div
+
+id="progressBar"
+
+class="progress-bar progress-bar-striped progress-bar-animated"
+
+style="width:0%;">
+
+0%
+
+</div>
+
+</div>
+
+<p
+
+id="statusText"
+
+class="text-center mt-3 text-muted">
+
+대기중
+
+</p>
+</div>
+
+<hr class="my-4">
+
+<div class="row g-3">
+
+<div class="col-md-6">
+
+<button
+id="generateBtn"
+class="btn btn-success w-100">
+
+<i class="bi bi-upc-scan"></i>
+
+바코드 생성
+
+</button>
+
+</div>
+
+<div class="col-md-6">
+
+<button
+id="downloadBtn"
+class="btn btn-primary w-100">
+
+<i class="bi bi-download"></i>
+
+PNG 다운로드
+
+</button>
+
+</div>
+
+<div class="col-md-4">
+
+<button
+id="copyBtn"
+class="btn btn-secondary w-100">
+
+<i class="bi bi-clipboard"></i>
+
+내용 복사
+
+</button>
+
+</div>
+
+<div class="col-md-4">
+
+<button
+id="clearBtn"
+class="btn btn-warning w-100">
+
+<i class="bi bi-arrow-clockwise"></i>
+
+초기화
+
+</button>
+
+</div>
+
+<div class="col-md-4">
+
+<button
+id="deleteBtn"
+class="btn btn-danger w-100">
+
+<i class="bi bi-trash"></i>
+
+기록 삭제
+
+</button>
+
+</div>
+
+</div>
+
+<hr class="my-5">
+
+<h4>
+
+<i class="bi bi-clock-history"></i>
+
+생성 기록
+
+</h4>
+
+<div class="table-responsive">
+
+<table class="table table-striped table-hover align-middle">
+
+<thead class="table-dark">
+
+<tr>
+
+<th width="70">
+
+번호
+
+</th>
+
+<th>
+
+내용
+
+</th>
+
+<th width="130">
+
+종류
+
+</th>
+
+<th width="170">
+
+생성시간
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyTable">
+
+<tr>
+
+<td colspan="4" class="text-center text-muted">
+
+생성 기록이 없습니다.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JsBarcode -->
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   변수
+=========================== */
+
+const barcodeInput=document.getElementById("barcodeInput");
+
+const barcodeType=document.getElementById("barcodeType");
+
+const barcodeHeight=document.getElementById("barcodeHeight");
+
+const heightValue=document.getElementById("heightValue");
+
+const barcodeArea=document.getElementById("barcode");
+
+const historyTable=document.getElementById("historyTable");
+
+const progressBar=document.getElementById("progressBar");
+
+const statusText=document.getElementById("statusText");
+
+let historyList=[];
+
+let historyIndex=1;
+
+/* ===========================
+   높이 표시
+=========================== */
+
+barcodeHeight.addEventListener("input",function(){
+
+heightValue.textContent=this.value+" px";
+
+});
+
+/* ===========================
+   진행상태
+=========================== */
+
+function setProgress(percent,text){
+
+progressBar.style.width=percent+"%";
+
+progressBar.textContent=percent+"%";
+
+statusText.textContent=text;
+
+}
+
+/* ===========================
+   기록 추가
+=========================== */
+
+function addHistory(value,type){
+
+if(historyIndex===1){
+
+historyTable.innerHTML="";
+
+}
+
+const tr=document.createElement("tr");
+
+tr.innerHTML=`
+
+<td>${historyIndex}</td>
+
+<td>${value}</td>
+
+<td>${type}</td>
+
+<td>${new Date().toLocaleTimeString()}</td>
+
+`;
+
+historyTable.appendChild(tr);
+
+historyIndex++;
+
+}
+/* ===========================
+   바코드 생성
+=========================== */
+
+function generateBarcode(){
+
+    const value = barcodeInput.value.trim();
+
+    if(value===""){
+
+        alert("바코드 내용을 입력하세요.");
+
+        return;
+
+    }
+
+    const type = barcodeType.value;
+
+    barcodeArea.innerHTML='<svg id="barcodeSvg"></svg>';
+
+    try{
+
+        JsBarcode("#barcodeSvg", value, {
+
+            format:type,
+            height:parseInt(barcodeHeight.value),
+            displayValue:document.getElementById("showValue").checked,
+            margin:15
+
+        });
+
+    }catch(e){
+
+        barcodeArea.innerHTML=`
+        <div class="alert alert-danger mb-0">
+            선택한 바코드 형식에 맞지 않는 값입니다.
+        </div>`;
+
+        setProgress(0,"생성 실패");
+
+        return;
+
+    }
+
+    setProgress(100,"생성 완료");
+
+    if(document.getElementById("saveHistory").checked){
+
+        historyList.push({
+            value:value,
+            type:type,
+            time:new Date().toLocaleTimeString()
+        });
+
+        localStorage.setItem(
+            "barcodeHistory",
+            JSON.stringify(historyList)
+        );
+
+        addHistory(value,type);
+
+    }
+
+}
+
+document
+.getElementById("generateBtn")
+.addEventListener("click",generateBarcode);
+
+/* ===========================
+   PNG 다운로드
+=========================== */
+
+document
+.getElementById("downloadBtn")
+.addEventListener("click",function(){
+
+    const svg=document.getElementById("barcodeSvg");
+
+    if(!svg){
+
+        alert("먼저 바코드를 생성하세요.");
+
+        return;
+
+    }
+
+    const svgData=new XMLSerializer().serializeToString(svg);
+
+    const svgBlob=new Blob([svgData],{
+        type:"image/svg+xml;charset=utf-8"
+    });
+
+    const url=URL.createObjectURL(svgBlob);
+
+    const img=new Image();
+
+    img.onload=function(){
+
+        const canvas=document.createElement("canvas");
+
+        canvas.width=img.width;
+
+        canvas.height=img.height;
+
+        const ctx=canvas.getContext("2d");
+
+        ctx.fillStyle="#ffffff";
+
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        ctx.drawImage(img,0,0);
+
+        URL.revokeObjectURL(url);
+
+        const a=document.createElement("a");
+
+        a.href=canvas.toDataURL("image/png");
+
+        a.download="barcode.png";
+
+        a.click();
+
+    };
+
+    img.src=url;
+
+});
+
+/* ===========================
+   내용 복사
+=========================== */
+
+document
+.getElementById("copyBtn")
+.addEventListener("click",async function(){
+
+    if(barcodeInput.value.trim()===""){
+
+        alert("복사할 내용이 없습니다.");
+
+        return;
+
+    }
+
+    try{
+
+        await navigator.clipboard.writeText(barcodeInput.value);
+
+        alert("복사되었습니다.");
+
+    }catch{
+
+        alert("복사에 실패했습니다.");
+
+    }
+
+});
+
+/* ===========================
+   초기화
+=========================== */
+
+document
+.getElementById("clearBtn")
+.addEventListener("click",function(){
+
+    barcodeInput.value="";
+
+    barcodeArea.innerHTML=`
+    <span class="text-muted">
+        바코드가 여기에 표시됩니다.
+    </span>`;
+
+    setProgress(0,"대기중");
+
+});
+
+/* ===========================
+   기록 삭제
+=========================== */
+
+document
+.getElementById("deleteBtn")
+.addEventListener("click",function(){
+
+    historyIndex=1;
+
+    historyList=[];
+
+    localStorage.removeItem("barcodeHistory");
+
+    historyTable.innerHTML=`
+    <tr>
+        <td colspan="4" class="text-center text-muted">
+            생성 기록이 없습니다.
+        </td>
+    </tr>`;
+
+});
+
+/* ===========================
+   저장된 기록 복원
+=========================== */
+
+const savedHistory=JSON.parse(
+    localStorage.getItem("barcodeHistory")||"[]"
+);
+
+if(savedHistory.length>0){
+
+    historyTable.innerHTML="";
+
+    savedHistory.forEach(function(item){
+
+        historyList.push(item);
+
+        addHistory(item.value,item.type);
+
+    });
+
+}
+
+/* ===========================
+   Ctrl + Enter 생성
+=========================== */
+
+barcodeInput.addEventListener("keydown",function(e){
+
+    if(e.ctrlKey && e.key==="Enter"){
+
+        generateBarcode();
+
+    }
+
+});
+
+/* ===========================
+   초기 상태
+=========================== */
+
+setProgress(0,"대기중");
+
+</script>
+
+</body>
+</html>
