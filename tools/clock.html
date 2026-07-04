@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>시계 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+    background:#f5f6fa;
+    padding-top:70px;
+}
+
+.tool-card{
+    max-width:1200px;
+    margin:auto;
+    border-radius:20px;
+}
+
+.clock-display{
+
+    background:#212529;
+
+    color:#00ff88;
+
+    font-size:64px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    font-family:Consolas,monospace;
+
+    letter-spacing:3px;
+
+}
+
+.date-display{
+
+    text-align:center;
+
+    font-size:24px;
+
+    margin-top:15px;
+
+    color:#555;
+
+}
+
+#clockCanvas{
+
+    display:block;
+
+    margin:auto;
+
+    background:white;
+
+    border-radius:50%;
+
+    border:8px solid #343a40;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a class="nav-link" href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active">
+
+시계
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow tool-card">
+
+<div class="card-body">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-clock-history"></i>
+
+디지털 & 아날로그 시계
+
+</h2>
+
+<div
+id="digitalClock"
+class="clock-display">
+
+00:00:00
+
+</div>
+
+<div
+id="dateDisplay"
+class="date-display">
+
+2026-01-01 (목)
+
+</div>
+
+<hr>
+
+<div class="text-center">
+
+<canvas
+id="clockCanvas"
+width="320"
+height="320">
+
+</canvas>
+
+</div>
+
+<hr>
+
+<div class="row g-3">
+
+<div class="col-md-3">
+
+<button
+id="toggleFormatBtn"
+class="btn btn-primary w-100">
+
+24시간
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="toggleSecondBtn"
+class="btn btn-success w-100">
+
+초 표시
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="fullscreenBtn"
+class="btn btn-warning w-100">
+
+전체화면
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="copyTimeBtn"
+class="btn btn-info w-100">
+
+시간 복사
+
+</button>
+
+</div>
+<hr>
+
+<div class="row g-3">
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body text-center">
+
+<h6>UTC 시간</h6>
+
+<div
+id="utcClock"
+class="fs-4 fw-bold">
+
+00:00:00
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body text-center">
+
+<h6>현재 시간 형식</h6>
+
+<div
+id="formatStatus"
+class="fs-5">
+
+24시간
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body text-center">
+
+<h6>초 표시</h6>
+
+<div
+id="secondStatus"
+class="fs-5">
+
+ON
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   요소
+=========================== */
+
+const digitalClock=document.getElementById("digitalClock");
+const dateDisplay=document.getElementById("dateDisplay");
+const utcClock=document.getElementById("utcClock");
+
+const formatStatus=document.getElementById("formatStatus");
+const secondStatus=document.getElementById("secondStatus");
+
+const toggleFormatBtn=document.getElementById("toggleFormatBtn");
+const toggleSecondBtn=document.getElementById("toggleSecondBtn");
+const fullscreenBtn=document.getElementById("fullscreenBtn");
+const copyTimeBtn=document.getElementById("copyTimeBtn");
+
+const canvas=document.getElementById("clockCanvas");
+const ctx=canvas.getContext("2d");
+
+/* ===========================
+   설정
+=========================== */
+
+let use24Hour=
+
+JSON.parse(
+
+localStorage.getItem("clock24") ?? "true"
+
+);
+
+let showSecond=
+
+JSON.parse(
+
+localStorage.getItem("clockSecond") ?? "true"
+
+);
+
+/* ===========================
+   요일
+=========================== */
+
+const week=[
+
+"일",
+
+"월",
+
+"화",
+
+"수",
+
+"목",
+
+"금",
+
+"토"
+
+];
+
+/* ===========================
+   두 자리 표시
+=========================== */
+
+function pad(n){
+
+return String(n).padStart(2,"0");
+
+}
+/* ===========================
+   디지털 시계
+=========================== */
+
+function updateDigitalClock(){
+
+    const now=new Date();
+
+    let h=now.getHours();
+    const m=now.getMinutes();
+    const s=now.getSeconds();
+
+    let suffix="";
+
+    if(!use24Hour){
+
+        suffix=h>=12?" PM":" AM";
+
+        h=h%12;
+
+        if(h===0) h=12;
+
+    }
+
+    let time=
+
+        pad(h)+":"+pad(m);
+
+    if(showSecond){
+
+        time+=":"+pad(s);
+
+    }
+
+    digitalClock.textContent=time+suffix;
+
+    dateDisplay.textContent=
+
+        now.getFullYear()+"-"+
+
+        pad(now.getMonth()+1)+"-"+
+
+        pad(now.getDate())+
+
+        " ("+
+
+        week[now.getDay()]+
+
+        ")";
+
+    utcClock.textContent=
+
+        pad(now.getUTCHours())+":"+
+
+        pad(now.getUTCMinutes())+":"+
+
+        pad(now.getUTCSeconds());
+
+}
+
+/* ===========================
+   아날로그 시계
+=========================== */
+
+function drawClock(){
+
+    const now=new Date();
+
+    const w=canvas.width;
+    const h=canvas.height;
+
+    const r=w/2;
+
+    ctx.clearRect(0,0,w,h);
+
+    ctx.save();
+
+    ctx.translate(r,r);
+
+    /* 원 */
+
+    ctx.beginPath();
+
+    ctx.arc(0,0,r-8,0,Math.PI*2);
+
+    ctx.fillStyle="#ffffff";
+
+    ctx.fill();
+
+    ctx.lineWidth=6;
+
+    ctx.strokeStyle="#343a40";
+
+    ctx.stroke();
+
+    /* 눈금 */
+
+    for(let i=0;i<60;i++){
+
+        ctx.save();
+
+        ctx.rotate(i*Math.PI/30);
+
+        ctx.beginPath();
+
+        ctx.moveTo(0,-r+18);
+
+        ctx.lineTo(
+
+            0,
+
+            i%5===0
+
+            ?-r+38
+
+            :-r+28
+
+        );
+
+        ctx.lineWidth=
+
+            i%5===0
+
+            ?4
+
+            :2;
+
+        ctx.strokeStyle="#000";
+
+        ctx.stroke();
+
+        ctx.restore();
+
+    }
+
+    const sec=
+
+        now.getSeconds();
+
+    const min=
+
+        now.getMinutes()+sec/60;
+
+    const hour=
+
+        (now.getHours()%12)+min/60;
+
+    drawHand(
+
+        hour*Math.PI/6,
+
+        r*0.5,
+
+        6,
+
+        "#000"
+
+    );
+
+    drawHand(
+
+        min*Math.PI/30,
+
+        r*0.72,
+
+        4,
+
+        "#000"
+
+    );
+
+    if(showSecond){
+
+        drawHand(
+
+            sec*Math.PI/30,
+
+            r*0.82,
+
+            2,
+
+            "#dc3545"
+
+        );
+
+    }
+
+    ctx.beginPath();
+
+    ctx.arc(0,0,6,0,Math.PI*2);
+
+    ctx.fillStyle="#000";
+
+    ctx.fill();
+
+    ctx.restore();
+
+}
+
+/* ===========================
+   시계 바늘
+=========================== */
+
+function drawHand(angle,length,width,color){
+
+    ctx.save();
+
+    ctx.rotate(angle);
+
+    ctx.beginPath();
+
+    ctx.moveTo(0,12);
+
+    ctx.lineTo(0,-length);
+
+    ctx.lineWidth=width;
+
+    ctx.lineCap="round";
+
+    ctx.strokeStyle=color;
+
+    ctx.stroke();
+
+    ctx.restore();
+
+}
+
+/* ===========================
+   시계 갱신
+=========================== */
+
+function refreshClock(){
+
+    updateDigitalClock();
+
+    drawClock();
+
+}
+
+setInterval(
+
+    refreshClock,
+
+    1000
+
+);
+/* ===========================
+   12시간 / 24시간 전환
+=========================== */
+
+toggleFormatBtn.addEventListener("click",function(){
+
+    use24Hour=!use24Hour;
+
+    localStorage.setItem(
+
+        "clock24",
+
+        JSON.stringify(use24Hour)
+
+    );
+
+    formatStatus.textContent=
+
+        use24Hour
+
+        ?"24시간"
+
+        :"12시간";
+
+    toggleFormatBtn.textContent=
+
+        use24Hour
+
+        ?"24시간"
+
+        :"12시간";
+
+    refreshClock();
+
+});
+
+/* ===========================
+   초 표시 ON/OFF
+=========================== */
+
+toggleSecondBtn.addEventListener("click",function(){
+
+    showSecond=!showSecond;
+
+    localStorage.setItem(
+
+        "clockSecond",
+
+        JSON.stringify(showSecond)
+
+    );
+
+    secondStatus.textContent=
+
+        showSecond
+
+        ?"ON"
+
+        :"OFF";
+
+    toggleSecondBtn.textContent=
+
+        showSecond
+
+        ?"초 표시"
+
+        :"초 숨김";
+
+    refreshClock();
+
+});
+
+/* ===========================
+   전체화면
+=========================== */
+
+fullscreenBtn.addEventListener("click",async function(){
+
+    if(!document.fullscreenElement){
+
+        await document.documentElement.requestFullscreen();
+
+    }else{
+
+        await document.exitFullscreen();
+
+    }
+
+});
+
+/* ===========================
+   현재 시간 복사
+=========================== */
+
+copyTimeBtn.addEventListener("click",async function(){
+
+    try{
+
+        await navigator.clipboard.writeText(
+
+            digitalClock.textContent
+
+        );
+
+        alert("현재 시간을 복사했습니다.");
+
+    }
+
+    catch{
+
+        alert("복사에 실패했습니다.");
+
+    }
+
+});
+
+/* ===========================
+   최초 상태 적용
+=========================== */
+
+formatStatus.textContent=
+
+    use24Hour
+
+    ?"24시간"
+
+    :"12시간";
+
+secondStatus.textContent=
+
+    showSecond
+
+    ?"ON"
+
+    :"OFF";
+
+toggleFormatBtn.textContent=
+
+    use24Hour
+
+    ?"24시간"
+
+    :"12시간";
+
+toggleSecondBtn.textContent=
+
+    showSecond
+
+    ?"초 표시"
+
+    :"초 숨김";
+
+/* ===========================
+   최초 실행
+=========================== */
+
+refreshClock();
+
+</script>
+
+</body>
+
+</html>
