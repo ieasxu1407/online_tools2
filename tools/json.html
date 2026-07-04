@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>JSON Formatter / Validator | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+    background:#f5f6fa;
+    padding-top:70px;
+}
+
+.tool-card{
+    max-width:1400px;
+    margin:auto;
+    border-radius:20px;
+}
+
+textarea{
+
+    min-height:420px;
+
+    resize:vertical;
+
+    font-family:Consolas,monospace;
+
+    font-size:14px;
+
+}
+
+.result-box{
+
+    min-height:420px;
+
+    background:#f8f9fa;
+
+    border:2px solid #dee2e6;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+
+    overflow:auto;
+
+    font-family:Consolas,monospace;
+
+    font-size:14px;
+
+}
+
+.info-card{
+
+    border-radius:12px;
+
+    text-align:center;
+
+    padding:15px;
+
+    background:#f8f9fa;
+
+    border:1px solid #dee2e6;
+
+}
+
+.success{
+
+    color:#198754;
+
+}
+
+.error{
+
+    color:#dc3545;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div
+class="collapse navbar-collapse"
+id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a
+class="nav-link"
+href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a
+class="nav-link active">
+
+JSON Formatter
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow tool-card">
+
+<div class="card-body">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-braces"></i>
+
+JSON Formatter / Validator
+
+</h2>
+
+<div class="row g-4">
+
+<div class="col-lg-6">
+
+<label class="form-label">
+
+입력 JSON
+
+</label>
+
+<textarea
+id="inputText"
+class="form-control"
+placeholder='예:
+{
+  "name":"Online Tools",
+  "version":"1.0"
+}'></textarea>
+
+</div>
+
+<div class="col-lg-6">
+
+<label class="form-label">
+
+결과
+
+</label>
+
+<div
+id="resultBox"
+class="result-box">
+
+결과가 여기에 표시됩니다.
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="row g-3">
+
+<div class="col-md-3">
+
+<button
+id="formatBtn"
+class="btn btn-success w-100">
+
+포맷
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="minifyBtn"
+class="btn btn-primary w-100">
+
+압축
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="validateBtn"
+class="btn btn-warning w-100">
+
+검사
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="copyBtn"
+class="btn btn-info w-100">
+
+복사
+
+</button>
+
+</div>
+<hr>
+
+<div class="row g-3">
+
+<div class="col-md-2">
+
+<button
+id="swapBtn"
+class="btn btn-secondary w-100">
+
+입력↔결과
+
+</button>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+id="clearBtn"
+class="btn btn-danger w-100">
+
+모두 지우기
+
+</button>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+id="sampleBtn"
+class="btn btn-dark w-100">
+
+샘플
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="saveBtn"
+class="btn btn-success w-100">
+
+JSON 저장
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<input
+type="file"
+id="fileInput"
+class="form-control"
+accept=".json,.txt">
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="row g-3">
+
+<div class="col-md-3">
+
+<div class="info-card">
+
+<h6>
+
+상태
+
+</h6>
+
+<div
+id="statusText"
+class="fw-bold">
+
+대기중
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="info-card">
+
+<h6>
+
+라인 수
+
+</h6>
+
+<div
+id="lineCount"
+class="fw-bold">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="info-card">
+
+<h6>
+
+키(Key)
+
+</h6>
+
+<div
+id="keyCount"
+class="fw-bold">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="info-card">
+
+<h6>
+
+크기(Byte)
+
+</h6>
+
+<div
+id="byteCount"
+class="fw-bold">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<h5>
+
+최근 작업
+
+</h5>
+
+<div
+id="historyList"
+class="border rounded p-3"
+style="height:220px;overflow:auto;">
+
+<div class="text-muted">
+
+기록이 없습니다.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   요소
+=========================== */
+
+const inputText=document.getElementById("inputText");
+const resultBox=document.getElementById("resultBox");
+
+const formatBtn=document.getElementById("formatBtn");
+const minifyBtn=document.getElementById("minifyBtn");
+const validateBtn=document.getElementById("validateBtn");
+const copyBtn=document.getElementById("copyBtn");
+
+const swapBtn=document.getElementById("swapBtn");
+const clearBtn=document.getElementById("clearBtn");
+const sampleBtn=document.getElementById("sampleBtn");
+const saveBtn=document.getElementById("saveBtn");
+
+const fileInput=document.getElementById("fileInput");
+
+const statusText=document.getElementById("statusText");
+const lineCount=document.getElementById("lineCount");
+const keyCount=document.getElementById("keyCount");
+const byteCount=document.getElementById("byteCount");
+
+const historyList=document.getElementById("historyList");
+
+/* ===========================
+   LocalStorage
+=========================== */
+
+let historyData=JSON.parse(
+
+localStorage.getItem("jsonHistory")||"[]"
+
+);
+
+/* ===========================
+   기록 출력
+=========================== */
+
+function renderHistory(){
+
+    historyList.innerHTML="";
+
+    if(historyData.length===0){
+
+        historyList.innerHTML=
+
+        '<div class="text-muted">기록이 없습니다.</div>';
+
+        return;
+
+    }
+
+    historyData.forEach(item=>{
+
+        historyList.innerHTML+=`
+
+<div class="border-bottom py-2">
+
+<strong>${item.type}</strong>
+
+<br>
+
+<small>
+
+${item.time}
+
+</small>
+
+</div>
+
+`;
+
+    });
+
+}
+
+/* ===========================
+   기록 추가
+=========================== */
+
+function addHistory(type){
+
+    historyData.unshift({
+
+        type:type,
+
+        time:new Date().toLocaleString()
+
+    });
+
+    historyData=historyData.slice(0,20);
+
+    localStorage.setItem(
+
+        "jsonHistory",
+
+        JSON.stringify(historyData)
+
+    );
+
+    renderHistory();
+
+}
+/* ===========================
+   통계 계산
+=========================== */
+
+function updateStats(text,obj){
+
+    lineCount.textContent=text.split(/\r?\n/).length;
+
+    byteCount.textContent=new TextEncoder().encode(text).length;
+
+    let keys=0;
+
+    function countKeys(value){
+
+        if(Array.isArray(value)){
+
+            value.forEach(countKeys);
+
+        }
+
+        else if(value!==null && typeof value==="object"){
+
+            Object.keys(value).forEach(function(k){
+
+                keys++;
+
+                countKeys(value[k]);
+
+            });
+
+        }
+
+    }
+
+    countKeys(obj);
+
+    keyCount.textContent=keys;
+
+}
+
+/* ===========================
+   JSON 포맷
+=========================== */
+
+function formatJSON(){
+
+    try{
+
+        const obj=JSON.parse(inputText.value);
+
+        const pretty=JSON.stringify(obj,null,4);
+
+        resultBox.textContent=pretty;
+
+        statusText.textContent="유효한 JSON";
+
+        statusText.className="fw-bold success";
+
+        updateStats(pretty,obj);
+
+        localStorage.setItem(
+
+            "jsonLast",
+
+            inputText.value
+
+        );
+
+        addHistory("포맷");
+
+    }
+
+    catch(err){
+
+        resultBox.textContent=err.message;
+
+        statusText.textContent="오류";
+
+        statusText.className="fw-bold error";
+
+    }
+
+}
+
+/* ===========================
+   JSON 압축
+=========================== */
+
+function minifyJSON(){
+
+    try{
+
+        const obj=JSON.parse(inputText.value);
+
+        const text=JSON.stringify(obj);
+
+        resultBox.textContent=text;
+
+        statusText.textContent="유효한 JSON";
+
+        statusText.className="fw-bold success";
+
+        updateStats(text,obj);
+
+        addHistory("압축");
+
+    }
+
+    catch(err){
+
+        resultBox.textContent=err.message;
+
+        statusText.textContent="오류";
+
+        statusText.className="fw-bold error";
+
+    }
+
+}
+
+/* ===========================
+   JSON 검사
+=========================== */
+
+function validateJSON(){
+
+    try{
+
+        const obj=JSON.parse(inputText.value);
+
+        resultBox.textContent="✔ JSON 형식이 올바릅니다.";
+
+        statusText.textContent="유효";
+
+        statusText.className="fw-bold success";
+
+        updateStats(inputText.value,obj);
+
+        addHistory("검사");
+
+    }
+
+    catch(err){
+
+        resultBox.textContent=
+
+        "❌ "+err.message;
+
+        statusText.textContent="오류";
+
+        statusText.className="fw-bold error";
+
+    }
+
+}
+
+/* ===========================
+   자동 저장
+=========================== */
+
+inputText.addEventListener(
+
+    "input",
+
+    function(){
+
+        localStorage.setItem(
+
+            "jsonLast",
+
+            inputText.value
+
+        );
+
+    }
+
+);
+
+/* ===========================
+   버튼
+=========================== */
+
+formatBtn.addEventListener(
+
+    "click",
+
+    formatJSON
+
+);
+
+minifyBtn.addEventListener(
+
+    "click",
+
+    minifyJSON
+
+);
+
+validateBtn.addEventListener(
+
+    "click",
+
+    validateJSON
+
+);
+/* ===========================
+   결과 복사
+=========================== */
+
+copyBtn.addEventListener("click", async function(){
+
+    const text=resultBox.textContent;
+
+    if(
+        text==="" ||
+        text==="결과가 여기에 표시됩니다."
+    ){
+        alert("복사할 내용이 없습니다.");
+        return;
+    }
+
+    try{
+
+        await navigator.clipboard.writeText(text);
+
+        alert("복사되었습니다.");
+
+    }catch{
+
+        alert("복사에 실패했습니다.");
+
+    }
+
+});
+
+/* ===========================
+   입력 ↔ 결과 바꾸기
+=========================== */
+
+swapBtn.addEventListener("click",function(){
+
+    const temp=inputText.value;
+
+    inputText.value=resultBox.textContent;
+
+    resultBox.textContent=temp;
+
+});
+
+/* ===========================
+   모두 지우기
+=========================== */
+
+clearBtn.addEventListener("click",function(){
+
+    inputText.value="";
+
+    resultBox.textContent="결과가 여기에 표시됩니다.";
+
+    statusText.textContent="대기중";
+    statusText.className="fw-bold";
+
+    lineCount.textContent="0";
+    keyCount.textContent="0";
+    byteCount.textContent="0";
+
+});
+
+/* ===========================
+   샘플 JSON
+=========================== */
+
+sampleBtn.addEventListener("click",function(){
+
+inputText.value=`{
+    "name":"Online Tools",
+    "version":"1.0",
+    "author":"GPT",
+    "features":[
+        "Formatter",
+        "Validator",
+        "Minify"
+    ]
+}`;
+
+formatJSON();
+
+});
+
+/* ===========================
+   JSON 파일 열기
+=========================== */
+
+fileInput.addEventListener("change",function(){
+
+    const file=this.files[0];
+
+    if(!file) return;
+
+    const reader=new FileReader();
+
+    reader.onload=function(e){
+
+        inputText.value=e.target.result;
+
+        resultBox.textContent="파일을 불러왔습니다.";
+
+    };
+
+    reader.readAsText(file,"UTF-8");
+
+});
+
+/* ===========================
+   JSON 저장
+=========================== */
+
+saveBtn.addEventListener("click",function(){
+
+    const text=resultBox.textContent;
+
+    if(
+        text==="" ||
+        text==="결과가 여기에 표시됩니다."
+    ){
+        alert("저장할 JSON이 없습니다.");
+        return;
+    }
+
+    const blob=new Blob(
+        [text],
+        {
+            type:"application/json;charset=utf-8"
+        }
+    );
+
+    const url=URL.createObjectURL(blob);
+
+    const a=document.createElement("a");
+
+    a.href=url;
+
+    a.download="formatted.json";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+
+});
+
+/* ===========================
+   Ctrl + Enter
+=========================== */
+
+inputText.addEventListener("keydown",function(e){
+
+    if(e.ctrlKey && e.key==="Enter"){
+
+        e.preventDefault();
+
+        formatJSON();
+
+    }
+
+});
+
+/* ===========================
+   마지막 입력 복원
+=========================== */
+
+const lastJSON=localStorage.getItem("jsonLast");
+
+if(lastJSON){
+
+    inputText.value=lastJSON;
+
+}
+
+/* ===========================
+   최초 실행
+=========================== */
+
+renderHistory();
+
+resultBox.textContent="결과가 여기에 표시됩니다.";
+
+</script>
+
+</body>
+
+</html>
