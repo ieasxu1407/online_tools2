@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Base64 인코더 / 디코더 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+    background:#f5f6fa;
+    padding-top:70px;
+}
+
+.tool-card{
+    max-width:1300px;
+    margin:auto;
+    border-radius:20px;
+}
+
+textarea{
+    min-height:320px;
+    resize:vertical;
+    font-family:Consolas,monospace;
+}
+
+.result-box{
+    min-height:320px;
+    background:#f8f9fa;
+    border:2px solid #dee2e6;
+    border-radius:12px;
+    padding:15px;
+    white-space:pre-wrap;
+    word-break:break-all;
+    font-family:Consolas,monospace;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div
+class="collapse navbar-collapse"
+id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a class="nav-link"
+href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active">
+
+Base64
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow tool-card">
+
+<div class="card-body">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-file-code"></i>
+
+Base64 인코더 / 디코더
+
+</h2>
+
+<div class="row g-4">
+
+<div class="col-lg-6">
+
+<label class="form-label">
+
+입력
+
+</label>
+
+<textarea
+id="inputText"
+class="form-control"
+placeholder="텍스트 또는 Base64 문자열을 입력하세요."></textarea>
+
+</div>
+
+<div class="col-lg-6">
+
+<label class="form-label">
+
+결과
+
+</label>
+
+<div
+id="resultBox"
+class="result-box">
+
+결과가 여기에 표시됩니다.
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="row g-3">
+
+<div class="col-md-3">
+
+<button
+id="encodeBtn"
+class="btn btn-success w-100">
+
+텍스트 → Base64
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="decodeBtn"
+class="btn btn-primary w-100">
+
+Base64 → 텍스트
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="swapBtn"
+class="btn btn-warning w-100">
+
+입력/결과 바꾸기
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="copyBtn"
+class="btn btn-info w-100">
+
+결과 복사
+
+</button>
+
+</div>
+<hr>
+
+<div class="row g-3">
+
+<div class="col-md-3">
+
+<button
+id="clearBtn"
+class="btn btn-danger w-100">
+
+모두 지우기
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="sampleBtn"
+class="btn btn-secondary w-100">
+
+샘플 입력
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="saveBtn"
+class="btn btn-dark w-100">
+
+결과 저장
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<input
+type="file"
+id="fileInput"
+class="form-control"
+accept=".txt">
+
+</div>
+
+</div>
+
+<hr>
+
+<h5>
+
+최근 변환 기록
+
+</h5>
+
+<div
+id="historyList"
+class="border rounded p-3"
+style="height:220px;overflow:auto;">
+
+<div class="text-muted">
+
+기록이 없습니다.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   요소
+=========================== */
+
+const inputText=document.getElementById("inputText");
+
+const resultBox=document.getElementById("resultBox");
+
+const encodeBtn=document.getElementById("encodeBtn");
+
+const decodeBtn=document.getElementById("decodeBtn");
+
+const swapBtn=document.getElementById("swapBtn");
+
+const copyBtn=document.getElementById("copyBtn");
+
+const clearBtn=document.getElementById("clearBtn");
+
+const sampleBtn=document.getElementById("sampleBtn");
+
+const saveBtn=document.getElementById("saveBtn");
+
+const fileInput=document.getElementById("fileInput");
+
+const historyList=document.getElementById("historyList");
+
+/* ===========================
+   LocalStorage
+=========================== */
+
+let historyData=JSON.parse(
+
+localStorage.getItem("base64History")||"[]"
+
+);
+
+/* ===========================
+   기록 출력
+=========================== */
+
+function renderHistory(){
+
+    historyList.innerHTML="";
+
+    if(historyData.length===0){
+
+        historyList.innerHTML=
+
+        '<div class="text-muted">기록이 없습니다.</div>';
+
+        return;
+
+    }
+
+    historyData.forEach(item=>{
+
+        historyList.innerHTML+=`
+
+<div class="border-bottom py-2">
+
+<div>
+
+<strong>${item.type}</strong>
+
+</div>
+
+<div
+style="font-size:13px;
+word-break:break-all;
+font-family:Consolas;">
+
+${item.value}
+
+</div>
+
+<small class="text-muted">
+
+${item.time}
+
+</small>
+
+</div>
+
+`;
+
+    });
+
+}
+
+/* ===========================
+   UTF-8 Base64
+=========================== */
+
+function encodeUTF8(text){
+
+    return btoa(
+
+        new TextEncoder()
+
+        .encode(text)
+
+        .reduce(
+
+            (s,b)=>s+String.fromCharCode(b),
+
+            ""
+
+        )
+
+    );
+
+}
+
+function decodeUTF8(base64){
+
+    const bytes=Uint8Array.from(
+
+        atob(base64),
+
+        c=>c.charCodeAt(0)
+
+    );
+
+    return new TextDecoder().decode(bytes);
+
+}
+/* ===========================
+   기록 저장
+=========================== */
+
+function addHistory(type,value){
+
+    historyData.unshift({
+
+        type:type,
+
+        value:value.length>120
+            ? value.substring(0,120)+"..."
+            : value,
+
+        time:new Date().toLocaleString()
+
+    });
+
+    if(historyData.length>20){
+
+        historyData.length=20;
+
+    }
+
+    localStorage.setItem(
+
+        "base64History",
+
+        JSON.stringify(historyData)
+
+    );
+
+    renderHistory();
+
+}
+
+/* ===========================
+   Base64 인코딩
+=========================== */
+
+function encodeText(){
+
+    const text=inputText.value;
+
+    if(text===""){
+
+        resultBox.textContent="입력값이 없습니다.";
+
+        return;
+
+    }
+
+    try{
+
+        const result=encodeUTF8(text);
+
+        resultBox.textContent=result;
+
+        addHistory("Encode",result);
+
+    }
+
+    catch(e){
+
+        resultBox.textContent="인코딩 실패";
+
+        console.error(e);
+
+    }
+
+}
+
+/* ===========================
+   Base64 디코딩
+=========================== */
+
+function decodeText(){
+
+    const text=inputText.value.trim();
+
+    if(text===""){
+
+        resultBox.textContent="입력값이 없습니다.";
+
+        return;
+
+    }
+
+    try{
+
+        const result=decodeUTF8(text);
+
+        resultBox.textContent=result;
+
+        addHistory("Decode",result);
+
+    }
+
+    catch(e){
+
+        resultBox.textContent="올바른 Base64 문자열이 아닙니다.";
+
+    }
+
+}
+
+/* ===========================
+   자동 인코딩
+=========================== */
+
+let autoTimer=null;
+
+inputText.addEventListener("input",function(){
+
+    clearTimeout(autoTimer);
+
+    autoTimer=setTimeout(function(){
+
+        if(inputText.value.trim()===""){
+
+            resultBox.textContent="결과가 여기에 표시됩니다.";
+
+            return;
+
+        }
+
+        encodeText();
+
+    },300);
+
+});
+
+/* ===========================
+   버튼
+=========================== */
+
+encodeBtn.addEventListener(
+
+    "click",
+
+    encodeText
+
+);
+
+decodeBtn.addEventListener(
+
+    "click",
+
+    decodeText
+
+);
+/* ===========================
+   결과 복사
+=========================== */
+
+copyBtn.addEventListener("click",async function(){
+
+    const text=resultBox.textContent;
+
+    if(
+        text==="" ||
+        text==="결과가 여기에 표시됩니다."
+    ){
+
+        alert("복사할 내용이 없습니다.");
+
+        return;
+
+    }
+
+    try{
+
+        await navigator.clipboard.writeText(text);
+
+        alert("복사되었습니다.");
+
+    }
+
+    catch{
+
+        alert("복사에 실패했습니다.");
+
+    }
+
+});
+
+/* ===========================
+   입력 / 결과 바꾸기
+=========================== */
+
+swapBtn.addEventListener("click",function(){
+
+    const temp=inputText.value;
+
+    inputText.value=resultBox.textContent;
+
+    resultBox.textContent=temp;
+
+});
+
+/* ===========================
+   TXT 파일 열기
+=========================== */
+
+fileInput.addEventListener("change",function(){
+
+    const file=this.files[0];
+
+    if(!file) return;
+
+    const reader=new FileReader();
+
+    reader.onload=function(e){
+
+        inputText.value=e.target.result;
+
+        resultBox.textContent="파일을 불러왔습니다.";
+
+    };
+
+    reader.readAsText(file,"UTF-8");
+
+});
+
+/* ===========================
+   결과 저장
+=========================== */
+
+saveBtn.addEventListener("click",function(){
+
+    const text=resultBox.textContent;
+
+    if(
+        text==="" ||
+        text==="결과가 여기에 표시됩니다."
+    ){
+
+        alert("저장할 내용이 없습니다.");
+
+        return;
+
+    }
+
+    const blob=new Blob(
+
+        [text],
+
+        {type:"text/plain;charset=utf-8"}
+
+    );
+
+    const url=URL.createObjectURL(blob);
+
+    const a=document.createElement("a");
+
+    a.href=url;
+
+    a.download="base64.txt";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+
+});
+
+/* ===========================
+   모두 지우기
+=========================== */
+
+clearBtn.addEventListener("click",function(){
+
+    inputText.value="";
+
+    resultBox.textContent="결과가 여기에 표시됩니다.";
+
+});
+
+/* ===========================
+   샘플 입력
+=========================== */
+
+sampleBtn.addEventListener("click",function(){
+
+    inputText.value="안녕하세요! Online Tools입니다. 😀";
+
+    encodeText();
+
+});
+
+/* ===========================
+   Ctrl + Enter
+=========================== */
+
+inputText.addEventListener("keydown",function(e){
+
+    if(e.ctrlKey && e.key==="Enter"){
+
+        e.preventDefault();
+
+        encodeText();
+
+    }
+
+});
+
+/* ===========================
+   최초 실행
+=========================== */
+
+renderHistory();
+
+resultBox.textContent="결과가 여기에 표시됩니다.";
+
+</script>
+
+</body>
+
+</html>
