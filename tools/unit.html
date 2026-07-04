@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>단위 변환기 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+
+background:#f5f6fa;
+
+padding-top:70px;
+
+}
+
+.tool-card{
+
+max-width:1200px;
+
+margin:auto;
+
+border-radius:20px;
+
+}
+
+.result-box{
+
+background:#f8f9fa;
+
+border-radius:12px;
+
+padding:20px;
+
+font-size:24px;
+
+font-weight:bold;
+
+text-align:center;
+
+border:2px solid #dee2e6;
+
+}
+
+.favorite{
+
+cursor:pointer;
+
+font-size:20px;
+
+}
+
+.history-item{
+
+padding:10px;
+
+border-bottom:1px solid #e9ecef;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div
+class="collapse navbar-collapse"
+id="navbarMenu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a class="nav-link"
+href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active">
+
+단위 변환기
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="card shadow tool-card">
+
+<div class="card-body">
+
+<h2 class="text-center mb-4">
+
+<i class="bi bi-arrow-left-right"></i>
+
+단위 변환기
+
+</h2>
+
+<div class="row g-3">
+
+<div class="col-md-4">
+
+<label class="form-label">
+
+변환 종류
+
+</label>
+
+<select
+id="category"
+class="form-select">
+
+<option value="length">길이</option>
+
+<option value="weight">무게</option>
+
+<option value="temperature">온도</option>
+
+<option value="time">시간</option>
+
+<option value="area">면적</option>
+
+<option value="volume">부피</option>
+
+<option value="speed">속도</option>
+
+<option value="data">데이터</option>
+
+</select>
+
+</div>
+
+<div class="col-md-4">
+
+<label class="form-label">
+
+입력 값
+
+</label>
+
+<input
+type="number"
+id="inputValue"
+class="form-control"
+value="1"
+step="any">
+
+</div>
+
+<div class="col-md-4">
+
+<label class="form-label">
+
+즐겨찾기
+
+</label>
+
+<div class="form-control">
+
+<span
+id="favoriteBtn"
+class="favorite">
+
+⭐
+
+</span>
+
+현재 단위 저장
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="row g-3">
+
+<div class="col-md-5">
+
+<label class="form-label">
+
+변환 전
+
+</label>
+
+<select
+id="fromUnit"
+class="form-select">
+
+</select>
+
+</div>
+
+<div class="col-md-2 d-grid">
+
+<label class="form-label">
+
+&nbsp;
+
+</label>
+
+<button
+id="swapBtn"
+class="btn btn-primary">
+
+⇄
+
+</button>
+
+</div>
+
+<div class="col-md-5">
+
+<label class="form-label">
+
+변환 후
+
+</label>
+
+<select
+id="toUnit"
+class="form-select">
+
+</select>
+
+</div>
+
+</div>
+
+<hr>
+
+<div
+id="resultBox"
+class="result-box">
+
+결과가 여기에 표시됩니다.
+
+</div>
+<hr>
+
+<div class="row g-3">
+
+<div class="col-md-3">
+
+<button
+id="convertBtn"
+class="btn btn-success w-100">
+
+변환
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="copyBtn"
+class="btn btn-primary w-100">
+
+결과 복사
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="exampleBtn"
+class="btn btn-warning w-100">
+
+랜덤 예제
+
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+id="clearHistoryBtn"
+class="btn btn-danger w-100">
+
+기록 삭제
+
+</button>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="row">
+
+<div class="col-lg-6">
+
+<h5>
+
+최근 변환 기록
+
+</h5>
+
+<div
+id="historyList"
+class="border rounded p-3"
+style="height:220px;overflow:auto;">
+
+<div class="text-muted">
+
+기록이 없습니다.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<h5>
+
+즐겨찾기
+
+</h5>
+
+<div
+id="favoriteList"
+class="border rounded p-3"
+style="height:220px;overflow:auto;">
+
+<div class="text-muted">
+
+즐겨찾기가 없습니다.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+/* ===========================
+   요소
+=========================== */
+
+const category=document.getElementById("category");
+const inputValue=document.getElementById("inputValue");
+
+const fromUnit=document.getElementById("fromUnit");
+const toUnit=document.getElementById("toUnit");
+
+const resultBox=document.getElementById("resultBox");
+
+const historyList=document.getElementById("historyList");
+const favoriteList=document.getElementById("favoriteList");
+
+/* ===========================
+   단위 데이터
+=========================== */
+
+const units={
+
+length:{
+mm:0.001,
+cm:0.01,
+m:1,
+km:1000,
+inch:0.0254,
+ft:0.3048,
+yd:0.9144,
+mile:1609.344
+},
+
+weight:{
+mg:0.001,
+g:1,
+kg:1000,
+ton:1000000,
+oz:28.349523125,
+lb:453.59237
+},
+
+time:{
+ms:0.001,
+sec:1,
+min:60,
+hour:3600,
+day:86400,
+week:604800
+},
+
+speed:{
+"m/s":1,
+"km/h":0.2777777778,
+mph:0.44704,
+knot:0.514444
+},
+
+data:{
+Bit:0.125,
+Byte:1,
+KB:1024,
+MB:1048576,
+GB:1073741824,
+TB:1099511627776
+},
+
+area:{
+"㎡":1,
+"㎢":1000000,
+"평":3.305785,
+acre:4046.8564224,
+hectare:10000
+},
+
+volume:{
+mL:0.001,
+cc:0.001,
+L:1,
+gallon:3.785411784
+}
+
+};
+
+/* ===========================
+   저장 데이터
+=========================== */
+
+let historyData=JSON.parse(
+
+localStorage.getItem("unitHistory")||"[]"
+
+);
+
+let favoriteData=JSON.parse(
+
+localStorage.getItem("unitFavorite")||"[]"
+
+);
+/* ===========================
+   단위 목록 채우기
+=========================== */
+
+function loadUnits(){
+
+    fromUnit.innerHTML="";
+    toUnit.innerHTML="";
+
+    if(category.value==="temperature"){
+
+        ["℃","℉","K"].forEach(unit=>{
+
+            fromUnit.add(new Option(unit,unit));
+            toUnit.add(new Option(unit,unit));
+
+        });
+
+    }else{
+
+        Object.keys(units[category.value]).forEach(unit=>{
+
+            fromUnit.add(new Option(unit,unit));
+            toUnit.add(new Option(unit,unit));
+
+        });
+
+    }
+
+    toUnit.selectedIndex=1;
+
+}
+
+/* ===========================
+   변환
+=========================== */
+
+function convert(){
+
+    const value=parseFloat(inputValue.value);
+
+    if(isNaN(value)) return;
+
+    let result=0;
+
+    if(category.value==="temperature"){
+
+        const from=fromUnit.value;
+        const to=toUnit.value;
+
+        let c;
+
+        if(from==="℃") c=value;
+        if(from==="℉") c=(value-32)/1.8;
+        if(from==="K") c=value-273.15;
+
+        if(to==="℃") result=c;
+        if(to==="℉") result=c*1.8+32;
+        if(to==="K") result=c+273.15;
+
+    }else{
+
+        const data=units[category.value];
+
+        result=value*data[fromUnit.value]/data[toUnit.value];
+
+    }
+
+    resultBox.innerHTML=
+        `${value} ${fromUnit.value}<br>⬇<br><b>${result.toFixed(6)}</b> ${toUnit.value}`;
+
+    historyData.unshift(
+        `${value} ${fromUnit.value} → ${result.toFixed(6)} ${toUnit.value}`
+    );
+
+    historyData=historyData.slice(0,20);
+
+    localStorage.setItem(
+        "unitHistory",
+        JSON.stringify(historyData)
+    );
+
+    renderHistory();
+
+}
+
+/* ===========================
+   기록
+=========================== */
+
+function renderHistory(){
+
+    historyList.innerHTML="";
+
+    if(historyData.length===0){
+
+        historyList.innerHTML="<div class='text-muted'>기록이 없습니다.</div>";
+
+        return;
+
+    }
+
+    historyData.forEach(item=>{
+
+        historyList.innerHTML+=
+        `<div class="history-item">${item}</div>`;
+
+    });
+
+}
+
+/* ===========================
+   즐겨찾기
+=========================== */
+
+function renderFavorite(){
+
+    favoriteList.innerHTML="";
+
+    if(favoriteData.length===0){
+
+        favoriteList.innerHTML="<div class='text-muted'>즐겨찾기가 없습니다.</div>";
+
+        return;
+
+    }
+
+    favoriteData.forEach(item=>{
+
+        favoriteList.innerHTML+=
+        `<div class="history-item">${item}</div>`;
+
+    });
+
+}
+
+document.getElementById("favoriteBtn").onclick=function(){
+
+    const text=
+    `${category.value} : ${fromUnit.value} → ${toUnit.value}`;
+
+    if(!favoriteData.includes(text)){
+
+        favoriteData.push(text);
+
+        localStorage.setItem(
+            "unitFavorite",
+            JSON.stringify(favoriteData)
+        );
+
+        renderFavorite();
+
+    }
+
+};
+
+/* ===========================
+   단위 교환
+=========================== */
+
+document.getElementById("swapBtn").onclick=function(){
+
+    const temp=fromUnit.value;
+
+    fromUnit.value=toUnit.value;
+
+    toUnit.value=temp;
+
+    convert();
+
+};
+
+/* ===========================
+   결과 복사
+=========================== */
+
+document.getElementById("copyBtn").onclick=async function(){
+
+    try{
+
+        await navigator.clipboard.writeText(
+            resultBox.innerText
+        );
+
+        alert("복사되었습니다.");
+
+    }catch{
+
+        alert("복사 실패");
+
+    }
+
+};
+
+/* ===========================
+   랜덤 예제
+=========================== */
+
+document.getElementById("exampleBtn").onclick=function(){
+
+    inputValue.value=Math.floor(Math.random()*1000)+1;
+
+    convert();
+
+};
+
+/* ===========================
+   기록 삭제
+=========================== */
+
+document.getElementById("clearHistoryBtn").onclick=function(){
+
+    if(!confirm("기록을 삭제하시겠습니까?")) return;
+
+    historyData=[];
+
+    localStorage.removeItem("unitHistory");
+
+    renderHistory();
+
+};
+
+/* ===========================
+   이벤트
+=========================== */
+
+category.onchange=function(){
+
+    loadUnits();
+
+    convert();
+
+};
+
+inputValue.oninput=convert;
+fromUnit.onchange=convert;
+toUnit.onchange=convert;
+
+document.getElementById("convertBtn").onclick=convert;
+
+/* ===========================
+   최초 실행
+=========================== */
+
+loadUnits();
+
+renderHistory();
+
+renderFavorite();
+
+convert();
+
+</script>
+
+</body>
+
+</html>
