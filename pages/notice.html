@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>공지사항 | Online Tools</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+body{
+    background:#f5f6fa;
+    padding-top:70px;
+}
+
+.notice-card{
+    transition:.2s;
+}
+
+.notice-card:hover{
+    transform:translateY(-2px);
+}
+
+.badge-important{
+    background:#dc3545;
+}
+
+.notice-date{
+    color:#6c757d;
+    font-size:14px;
+}
+
+.notice-category{
+    font-size:13px;
+}
+
+#emptyMessage{
+    display:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="../index.html">
+
+<i class="bi bi-tools"></i>
+
+Online Tools
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+
+<a class="nav-link"
+
+href="../index.html">
+
+홈
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active">
+
+공지사항
+
+</a>
+
+</li>
+
+</ul>
+
+<button
+id="darkModeBtn"
+class="btn btn-outline-light">
+
+<i class="bi bi-moon"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<h2 class="text-center mb-4">
+
+📢 공지사항
+
+</h2>
+
+<div class="row mb-4">
+
+<div class="col-md-8">
+
+<input
+
+id="searchInput"
+
+class="form-control"
+
+placeholder="공지 검색">
+
+</div>
+
+<div class="col-md-4">
+
+<select
+
+id="sortSelect"
+
+class="form-select">
+
+<option value="new">
+
+최신순
+
+</option>
+
+<option value="old">
+
+오래된순
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div id="noticeList">
+
+<div class="card mb-3 notice-card">
+
+<div class="card-body">
+
+<span class="badge badge-important">
+
+중요
+
+</span>
+
+<span class="badge bg-primary notice-category">
+
+업데이트
+
+</span>
+
+<h5 class="mt-3">
+
+Base64 인코더 / 디코더 추가
+
+</h5>
+
+<div class="notice-date">
+
+2026-07-05
+
+</div>
+
+<p class="mt-3">
+
+새로운 Base64 인코더/디코더가 추가되었습니다.
+
+한글과 이모지를 완벽하게 지원합니다.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card mb-3 notice-card">
+
+<div class="card-body">
+
+<span class="badge bg-success notice-category">
+
+신규
+
+</span>
+
+<h5 class="mt-3">
+
+JSON Formatter 추가
+
+</h5>
+
+<div class="notice-date">
+
+2026-07-04
+
+</div>
+
+<p class="mt-3">
+
+JSON 포맷, 압축, 유효성 검사 기능을 제공합니다.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card mb-3 notice-card">
+
+<div class="card-body">
+
+<span class="badge bg-secondary notice-category">
+
+안내
+
+</span>
+
+<h5 class="mt-3">
+
+사이트 오픈
+
+</h5>
+
+<div class="notice-date">
+
+2026-06-28
+
+</div>
+
+<p class="mt-3">
+
+Online Tools가 정식 오픈했습니다.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+
+id="emptyMessage"
+
+class="alert alert-warning text-center">
+
+검색 결과가 없습니다.
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<div class="container">
+
+<hr>
+
+<div class="text-center text-muted">
+
+© 2026 Online Tools
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script>
+
+const searchInput=document.getElementById("searchInput");
+
+const noticeList=document.getElementById("noticeList");
+
+const emptyMessage=document.getElementById("emptyMessage");
+
+searchInput.addEventListener("input",function(){
+
+const keyword=this.value.toLowerCase();
+
+let visible=0;
+
+noticeList.querySelectorAll(".notice-card").forEach(card=>{
+
+const text=card.innerText.toLowerCase();
+
+if(text.includes(keyword)){
+
+card.style.display="block";
+
+visible++;
+
+}else{
+
+card.style.display="none";
+
+}
+
+});
+
+emptyMessage.style.display=
+
+visible===0
+
+?"block"
+
+:"none";
+
+});
+
+document
+
+.getElementById("sortSelect")
+
+.addEventListener("change",function(){
+
+const cards=[
+
+...noticeList.querySelectorAll(".notice-card")
+
+];
+
+if(this.value==="old"){
+
+cards.reverse();
+
+}else{
+
+cards.sort((a,b)=>0);
+
+}
+
+cards.forEach(card=>noticeList.appendChild(card));
+
+});
+
+</script>
+
+</body>
+
+</html>
