@@ -1,74 +1,162 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>온라인 도구 모음</title>
+<title>Online Tools</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
 
 <style>
 
 body{
-    background:#f5f5f5;
-    padding-top:70px;
-}
 
-.navbar{
-    background:#212121;
+background:#f5f6fa;
+
+padding-top:75px;
+
 }
 
 .navbar-brand{
-    color:white!important;
-    font-weight:bold;
+
+font-weight:bold;
+
+font-size:24px;
+
 }
 
-.nav-link{
-    color:#ddd!important;
-}
+.tool-grid{
 
-.dropdown-menu{
-    background:#2d2d2d;
-}
+display:grid;
 
-.dropdown-item{
-    color:white;
-}
+grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
 
-.dropdown-item:hover{
-    background:#3b3b3b;
-    color:white;
-}
+gap:18px;
 
-.hero{
-    background:white;
-    padding:60px;
-    border-radius:20px;
-    box-shadow:0 0 15px rgba(0,0,0,.1);
-}
-
-.search-box{
-    max-width:600px;
-    margin:auto;
 }
 
 .tool-card{
-    transition:.25s;
-    cursor:pointer;
+
+border-radius:16px;
+
+padding:22px 10px;
+
+text-align:center;
+
+text-decoration:none;
+
+color:#fff;
+
+transition:.2s;
+
+box-shadow:0 3px 8px rgba(0,0,0,.15);
+
 }
 
 .tool-card:hover{
-    transform:translateY(-6px);
+
+transform:translateY(-4px);
+
+color:#fff;
+
 }
 
-footer{
-    background:#212121;
-    color:white;
-    padding:40px;
-    margin-top:80px;
+.tool-card i{
+
+font-size:56px;
+
+display:block;
+
+margin-bottom:14px;
+
+}
+
+.tool-title{
+
+font-size:18px;
+
+font-weight:600;
+
+}
+
+.bg-blue{
+
+background:#3d7fba;
+
+}
+
+.bg-sky{
+
+background:#5bb8da;
+
+}
+
+.bg-green{
+
+background:#00FFD1;
+
+}
+
+.bg-orange{
+
+background:#f7b347;
+
+}
+
+.search-box{
+
+max-width:600px;
+
+margin:auto;
+
+margin-bottom:30px;
+
+}
+
+.section-title{
+
+font-weight:bold;
+
+margin-bottom:20px;
+
+}
+
+@media(max-width:576px){
+
+.tool-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+gap:12px;
+
+}
+
+.tool-card{
+
+padding:18px 6px;
+
+}
+
+.tool-card i{
+
+font-size:46px;
+
+}
+
+.tool-title{
+
+font-size:14px;
+
+}
+
 }
 
 </style>
@@ -77,7 +165,7 @@ footer{
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 
 <div class="container">
 
@@ -85,30 +173,31 @@ footer{
 
 <i class="bi bi-tools"></i>
 
-온라인 도구
+Online Tools
 
 </a>
 
 <button class="navbar-toggler"
+
 type="button"
+
 data-bs-toggle="collapse"
+
 data-bs-target="#menu">
 
 <span class="navbar-toggler-icon"></span>
 
 </button>
 
-<div class="collapse navbar-collapse"
-id="menu">
+<div class="collapse navbar-collapse" id="menu">
 
 <ul class="navbar-nav me-auto">
 
 <li class="nav-item">
 
-<a class="nav-link"
-href="index.html">
+<a class="nav-link active"
 
-<i class="bi bi-house-fill"></i>
+href="index.html">
 
 홈
 
@@ -116,121 +205,11 @@ href="index.html">
 
 </li>
 
-<li class="nav-item dropdown">
-
-<a class="nav-link dropdown-toggle"
-
-href="#"
-
-data-bs-toggle="dropdown">
-
-<i class="bi bi-wrench"></i>
-
-웹도구
-
-</a>
-
-<ul class="dropdown-menu">
-
-<li><a class="dropdown-item" href="tools/timer.html">타이머</a></li>
-
-<li><a class="dropdown-item" href="tools/stopwatch.html">스톱워치</a></li>
-
-<li><a class="dropdown-item" href="tools/calculator.html">계산기</a></li>
-
-<li><a class="dropdown-item" href="tools/calendar.html">달력</a></li>
-
-<li><a class="dropdown-item" href="tools/clock.html">시계</a></li>
-
-<li><a class="dropdown-item" href="tools/password.html">비밀번호 생성기</a></li>
-
-<li><a class="dropdown-item" href="tools/uuid.html">UUID 생성기</a></li>
-
-<li><a class="dropdown-item" href="tools/barcode.html">바코드 생성기</a></li>
-
-<li><a class="dropdown-item" href="tools/qr.html">QR 생성기</a></li>
-
-<li><a class="dropdown-item" href="tools/memo.html">메모장</a></li>
-
-<li><a class="dropdown-item" href="tools/random.html">랜덤 추첨기</a></li>
-
-<li><a class="dropdown-item" href="tools/unit.html">단위 변환기</a></li>
-
-<li><a class="dropdown-item" href="tools/color.html">색상 코드표</a></li>
-
-<li><a class="dropdown-item" href="tools/ip.html">IP 조회</a></li>
-
-<li><a class="dropdown-item" href="tools/whiteboard.html">화이트보드</a></li>
-
-</ul>
-
-</li>
-
-<li class="nav-item dropdown">
-
-<a class="nav-link dropdown-toggle"
-
-href="#"
-
-data-bs-toggle="dropdown">
-
-<i class="bi bi-code-slash"></i>
-
-개발도구
-
-</a>
-
-<ul class="dropdown-menu">
-
-<li><a class="dropdown-item" href="tools/html-editor.html">HTML 편집기</a></li>
-
-<li><a class="dropdown-item" href="#">JSON Formatter</a></li>
-
-<li><a class="dropdown-item" href="#">Base64</a></li>
-
-<li><a class="dropdown-item" href="#">URL Encode</a></li>
-
-<li><a class="dropdown-item" href="#">SHA256</a></li>
-
-<li><a class="dropdown-item" href="#">MD5</a></li>
-
-</ul>
-
-</li>
-
-<li class="nav-item dropdown">
-
-<a class="nav-link dropdown-toggle"
-
-href="#"
-
-data-bs-toggle="dropdown">
-
-<i class="bi bi-grid"></i>
-
-확장앱
-
-</a>
-
-<ul class="dropdown-menu">
-
-<li><a class="dropdown-item" href="#">특수문자표</a></li>
-
-<li><a class="dropdown-item" href="#">ASCII 생성기</a></li>
-
-<li><a class="dropdown-item" href="#">글자수 세기</a></li>
-
-<li><a class="dropdown-item" href="#">텍스트 비교</a></li>
-
-</ul>
-
-</li>
-
 <li class="nav-item">
 
 <a class="nav-link"
 
-href="notice.html">
+href="pages/notice.html">
 
 공지사항
 
@@ -242,9 +221,9 @@ href="notice.html">
 
 <a class="nav-link"
 
-href="changelog.html">
+href="pages/changelog.html">
 
-변경이력
+변경 이력
 
 </a>
 
@@ -254,7 +233,7 @@ href="changelog.html">
 
 <a class="nav-link"
 
-href="roadmap.html">
+href="pages/roadmap.html">
 
 로드맵
 
@@ -264,7 +243,11 @@ href="roadmap.html">
 
 </ul>
 
-<button class="btn btn-outline-light">
+<button
+
+id="darkModeBtn"
+
+class="btn btn-outline-light">
 
 <i class="bi bi-moon"></i>
 
@@ -278,324 +261,720 @@ href="roadmap.html">
 
 <div class="container">
 
-<div class="hero text-center">
+<h2 class="text-center mb-4">
 
-<h1 class="display-4 fw-bold">
+🛠 Online Tools
 
-온라인 도구 모음
+</h2>
 
-</h1>
-
-<p class="lead">
-
-Bootstrap 5 기반의 다양한 온라인 도구를 무료로 이용하세요.
-
-</p>
-
-<div class="search-box mt-5">
-
-<div class="input-group">
-
-<span class="input-group-text">
-
-<i class="bi bi-search"></i>
-
-</span>
+<div class="search-box">
 
 <input
-type="text"
-class="form-control"
+
+id="searchInput"
+
+class="form-control form-control-lg"
+
 placeholder="도구 검색...">
 
 </div>
 
-</div>
+<h4 class="section-title">
+
+전체 도구
+
+</h4>
+
+<div class="tool-grid" id="toolGrid">
+<!-- 1행 -->
+
+<a href="tools/timer.html"
+class="tool-card bg-blue">
+
+<i class="bi bi-hourglass-split"></i>
+
+<div class="tool-title">
+
+타이머
 
 </div>
 
-<div class="mt-5">
+</a>
 
-<h3>
+<a href="tools/stopwatch.html"
+class="tool-card bg-green">
+
+<i class="bi bi-stopwatch"></i>
+
+<div class="tool-title">
+
+스톱워치
+
+</div>
+
+</a>
+
+<a href="tools/clock.html"
+class="tool-card bg-sky">
+
+<i class="bi bi-clock-history"></i>
+
+<div class="tool-title">
+
+시계
+
+</div>
+
+</a>
+
+<!-- 2행 -->
+
+<a href="tools/calculator.html"
+class="tool-card bg-orange">
+
+<i class="bi bi-calculator"></i>
+
+<div class="tool-title">
+
+계산기
+
+</div>
+
+</a>
+
+<a href="tools/calendar.html"
+class="tool-card bg-blue">
+
+<i class="bi bi-calendar3"></i>
+
+<div class="tool-title">
+
+달력
+
+</div>
+
+</a>
+
+<a href="tools/memo.html"
+class="tool-card bg-green">
+
+<i class="bi bi-journal-text"></i>
+
+<div class="tool-title">
+
+메모장
+
+</div>
+
+</a>
+
+<!-- 3행 -->
+
+<a href="tools/password.html"
+class="tool-card bg-sky">
+
+<i class="bi bi-key-fill"></i>
+
+<div class="tool-title">
+
+비밀번호
+
+</div>
+
+</a>
+
+<a href="tools/qrcode.html"
+class="tool-card bg-orange">
+
+<i class="bi bi-qr-code"></i>
+
+<div class="tool-title">
+
+QR 코드
+
+</div>
+
+</a>
+
+<a href="tools/barcode.html"
+class="tool-card bg-blue">
+
+<i class="bi bi-upc-scan"></i>
+
+<div class="tool-title">
+
+바코드
+
+</div>
+
+</a>
+
+<!-- 4행 -->
+
+<a href="tools/base64.html"
+class="tool-card bg-green">
+
+<i class="bi bi-file-earmark-binary"></i>
+
+<div class="tool-title">
+
+Base64
+
+</div>
+
+</a>
+
+<a href="tools/hash.html"
+class="tool-card bg-sky">
+
+<i class="bi bi-shield-lock"></i>
+
+<div class="tool-title">
+
+Hash
+
+</div>
+
+</a>
+
+<a href="tools/json.html"
+class="tool-card bg-orange">
+
+<i class="bi bi-braces"></i>
+
+<div class="tool-title">
+
+JSON
+
+</div>
+
+</a>
+<!-- 5행 -->
+
+<a href="tools/html-editor.html"
+class="tool-card bg-blue">
+
+<i class="bi bi-code-slash"></i>
+
+<div class="tool-title">
+
+HTML Editor
+
+</div>
+
+</a>
+
+<a href="tools/whiteboard.html"
+class="tool-card bg-green">
+
+<i class="bi bi-pencil-square"></i>
+
+<div class="tool-title">
+
+화이트보드
+
+</div>
+
+</a>
+
+<a href="tools/unit.html"
+class="tool-card bg-orange">
+
+<i class="bi bi-arrow-left-right"></i>
+
+<div class="tool-title">
+
+단위 변환
+
+</div>
+
+</a>
+
+<!-- 6행 -->
+
+<a href="tools/random.html"
+class="tool-card bg-sky">
+
+<i class="bi bi-shuffle"></i>
+
+<div class="tool-title">
+
+랜덤 생성기
+
+</div>
+
+</a>
+
+<a href="tools/color.html"
+class="tool-card bg-blue">
+
+<i class="bi bi-palette-fill"></i>
+
+<div class="tool-title">
+
+색상 선택기
+
+</div>
+
+</a>
+
+<a href="tools/ip.html"
+class="tool-card bg-green">
+
+<i class="bi bi-globe2"></i>
+
+<div class="tool-title">
+
+IP 조회
+
+</div>
+
+</a>
+
+<!-- 7행 -->
+
+<a href="pages/notice.html"
+class="tool-card bg-orange">
+
+<i class="bi bi-megaphone-fill"></i>
+
+<div class="tool-title">
+
+공지사항
+
+</div>
+
+</a>
+
+<a href="pages/changelog.html"
+class="tool-card bg-sky">
+
+<i class="bi bi-clock-history"></i>
+
+<div class="tool-title">
+
+변경 이력
+
+</div>
+
+</a>
+
+<a href="pages/roadmap.html"
+class="tool-card bg-blue">
+
+<i class="bi bi-map-fill"></i>
+
+<div class="tool-title">
+
+로드맵
+
+</div>
+
+</a>
+
+<!-- 8행 (추가 예정 도구) -->
+
+<a href="#"
+class="tool-card bg-green">
+
+<i class="bi bi-markdown"></i>
+
+<div class="tool-title">
+
+Markdown
+
+<span class="badge bg-light text-dark ms-1">
+
+NEW
+
+</span>
+
+</div>
+
+</a>
+
+<a href="#"
+class="tool-card bg-orange">
+
+<i class="bi bi-link-45deg"></i>
+
+<div class="tool-title">
+
+URL Encoder
+
+<span class="badge bg-light text-dark ms-1">
+
+예정
+
+</span>
+
+</div>
+
+</a>
+
+<a href="#"
+class="tool-card bg-sky">
+
+<i class="bi bi-calendar-event"></i>
+
+<div class="tool-title">
+
+날짜 계산기
+
+<span class="badge bg-light text-dark ms-1">
+
+예정
+
+</span>
+
+</div>
+
+</a>
+</div>
+
+
+<!-- 인기 도구 -->
+
+<section class="mt-5">
+
+<h4 class="section-title">
 
 🔥 인기 도구
 
-</h3>
+</h4>
 
-<div class="row g-4">
+<div class="row g-3">
 
-<!-- 타이머 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/timer.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100 bg-primary text-white">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-alarm display-4"></i>
-                <h5 class="mt-3">타이머</h5>
-                <p class="small mb-0">시간 설정 타이머</p>
-            </div>
-        </div>
-    </a>
+<div class="col-md-4">
+
+<div class="card shadow-sm border-0">
+
+<div class="card-body text-center">
+
+<i class="bi bi-hourglass-split text-primary fs-1"></i>
+
+<h5 class="mt-3">
+
+타이머
+
+</h5>
+
+<p class="text-muted mb-3">
+
+가장 많이 사용하는 타이머
+
+</p>
+
+<a href="tools/timer.html"
+
+class="btn btn-primary">
+
+바로가기
+
+</a>
+
 </div>
 
-<!-- 스톱워치 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/stopwatch.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100 bg-success text-white">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-stopwatch display-4"></i>
-                <h5 class="mt-3">스톱워치</h5>
-                <p class="small mb-0">랩타임 지원</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- 계산기 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/calculator.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100 bg-warning">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-calculator display-4"></i>
-                <h5 class="mt-3">계산기</h5>
-                <p class="small mb-0">사칙연산 계산기</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- 메모장 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/memo.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100 bg-info text-white">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-journal-text display-4"></i>
-                <h5 class="mt-3">메모장</h5>
-                <p class="small mb-0">자동 저장</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- 달력 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/calendar.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100 bg-danger text-white">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-calendar3 display-4"></i>
-                <h5 class="mt-3">달력</h5>
-                <p class="small mb-0">월별 달력</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- 시계 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/clock.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100 bg-dark text-white">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-clock display-4"></i>
-                <h5 class="mt-3">시계</h5>
-                <p class="small mb-0">실시간 시계</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- QR -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/qr.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100" style="background:#6f42c1;color:white;">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-qr-code display-4"></i>
-                <h5 class="mt-3">QR 생성기</h5>
-                <p class="small mb-0">QR 코드 만들기</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- 바코드 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/barcode.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100" style="background:#fd7e14;color:white;">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-upc display-4"></i>
-                <h5 class="mt-3">바코드 생성기</h5>
-                <p class="small mb-0">Barcode Generator</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- UUID -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/uuid.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100" style="background:#20c997;color:white;">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-fingerprint display-4"></i>
-                <h5 class="mt-3">UUID 생성기</h5>
-                <p class="small mb-0">UUID v4 생성</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- 비밀번호 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/password.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100" style="background:#e83e8c;color:white;">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-shield-lock display-4"></i>
-                <h5 class="mt-3">비밀번호 생성기</h5>
-                <p class="small mb-0">강력한 비밀번호</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- 랜덤 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/random.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100" style="background:#198754;color:white;">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-shuffle display-4"></i>
-                <h5 class="mt-3">랜덤 추첨기</h5>
-                <p class="small mb-0">랜덤 선택</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- 단위변환 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/unit.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100" style="background:#0dcaf0;color:white;">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-arrow-left-right display-4"></i>
-                <h5 class="mt-3">단위 변환기</h5>
-                <p class="small mb-0">길이·무게·온도</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- 색상코드 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/color.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100" style="background:#6610f2;color:white;">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-palette display-4"></i>
-                <h5 class="mt-3">색상 코드표</h5>
-                <p class="small mb-0">HEX · RGB</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- 화이트보드 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/whiteboard.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100" style="background:#495057;color:white;">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-easel display-4"></i>
-                <h5 class="mt-3">화이트보드</h5>
-                <p class="small mb-0">그리기 도구</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- HTML 편집기 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/html-editor.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100" style="background:#ff5722;color:white;">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-code-slash display-4"></i>
-                <h5 class="mt-3">HTML 편집기</h5>
-                <p class="small mb-0">실시간 미리보기</p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- IP 조회 -->
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <a href="tools/ip.html" class="text-decoration-none">
-        <div class="card tool-card border-0 shadow h-100" style="background:#795548;color:white;">
-            <div class="card-body text-center p-4">
-                <i class="bi bi-globe2 display-4"></i>
-                <h5 class="mt-3">IP 조회</h5>
-                <p class="small mb-0">내 IP 확인</p>
-            </div>
-        </div>
-    </a>
 </div>
 
 </div>
+
+<div class="col-md-4">
+
+<div class="card shadow-sm border-0">
+
+<div class="card-body text-center">
+
+<i class="bi bi-stopwatch text-success fs-1"></i>
+
+<h5 class="mt-3">
+
+스톱워치
+
+</h5>
+
+<p class="text-muted mb-3">
+
+정밀한 시간 측정
+
+</p>
+
+<a href="tools/stopwatch.html"
+
+class="btn btn-success">
+
+바로가기
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card shadow-sm border-0">
+
+<div class="card-body text-center">
+
+<i class="bi bi-key-fill text-warning fs-1"></i>
+
+<h5 class="mt-3">
+
+비밀번호 생성기
+
+</h5>
+
+<p class="text-muted mb-3">
+
+안전한 비밀번호 생성
+
+</p>
+
+<a href="tools/password.html"
+
+class="btn btn-warning">
+
+바로가기
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- 최근 추가 -->
+
+<section class="mt-5">
+
+<h4 class="section-title">
+
+🆕 최근 추가된 도구
+
+</h4>
+
+<div class="list-group shadow-sm">
+
+<a href="tools/clock.html"
+
+class="list-group-item list-group-item-action">
+
+🕒 디지털 & 아날로그 시계
+
+<span class="badge bg-success float-end">
+
+NEW
+
+</span>
+
+</a>
+
+<a href="tools/base64.html"
+
+class="list-group-item list-group-item-action">
+
+📄 Base64 인코더 / 디코더
+
+</a>
+
+<a href="tools/json.html"
+
+class="list-group-item list-group-item-action">
+
+🧩 JSON Formatter
+
+</a>
+
+</div>
+
+</section>
+
+<!-- 사이트 통계 -->
+
+<section class="mt-5">
+
+<h4 class="section-title">
+
+📊 사이트 현황
+
+</h4>
+
+<div class="row g-3">
+
+<div class="col-6 col-md-3">
+
+<div class="card text-center shadow-sm">
+
+<div class="card-body">
+
+<h2 id="toolCount">
+
+19
+
+</h2>
+
+<div class="text-muted">
+
+도구
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-6 col-md-3">
+
+<div class="card text-center shadow-sm">
+
+<div class="card-body">
+
+<h2>
+
+4
+
+</h2>
+
+<div class="text-muted">
+
+운영 페이지
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-6 col-md-3">
+
+<div class="card text-center shadow-sm">
+
+<div class="card-body">
+
+<h2>
+
+100%
+
+</h2>
+
+<div class="text-muted">
+
+무료
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-6 col-md-3">
+
+<div class="card text-center shadow-sm">
+
+<div class="card-body">
+
+<h2>
+
+24H
+
+</h2>
+
+<div class="text-muted">
+
+언제든 이용
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
 
 <hr class="my-5">
-
-<h3 class="mb-4">
-모든 온라인 도구
-</h3>
-
-<div class="alert alert-light border shadow-sm">
-총 <strong>16개</strong>의 도구가 준비되어 있으며 앞으로 더 많은 도구가 추가될 예정입니다.
-</div>
-
-<footer>
+<footer class="mt-5">
 
 <div class="container">
 
-<div class="row">
+<hr>
 
-<div class="col-lg-4">
+<div class="row text-center">
 
-<h5>
-<i class="bi bi-tools"></i>
-온라인 도구
-</h5>
+<div class="col-md-4 mb-3">
 
-<p class="mt-3">
-Bootstrap 5 기반으로 제작된 다양한 온라인 도구를
-무료로 사용할 수 있습니다.
+<h5>Online Tools</h5>
+
+<p class="text-muted">
+
+빠르고 간편한 온라인 도구 모음
+
 </p>
 
 </div>
 
-<div class="col-lg-4">
+<div class="col-md-4 mb-3">
 
 <h5>바로가기</h5>
 
-<ul class="list-unstyled">
+<div class="d-grid gap-2">
 
-<li><a class="text-white text-decoration-none" href="index.html">홈</a></li>
+<a href="pages/notice.html" class="btn btn-outline-primary">
 
-<li><a class="text-white text-decoration-none" href="notice.html">공지사항</a></li>
+공지사항
 
-<li><a class="text-white text-decoration-none" href="changelog.html">변경이력</a></li>
+</a>
 
-<li><a class="text-white text-decoration-none" href="roadmap.html">로드맵</a></li>
+<a href="pages/changelog.html" class="btn btn-outline-success">
 
-</ul>
+변경 이력
+
+</a>
+
+<a href="pages/roadmap.html" class="btn btn-outline-warning">
+
+로드맵
+
+</a>
 
 </div>
 
-<div class="col-lg-4">
+</div>
 
-<h5>인기 도구</h5>
+<div class="col-md-4 mb-3">
 
-<ul class="list-unstyled">
+<h5>정보</h5>
 
-<li><a class="text-white text-decoration-none" href="tools/timer.html">타이머</a></li>
+<p class="text-muted">
 
-<li><a class="text-white text-decoration-none" href="tools/stopwatch.html">스톱워치</a></li>
+Bootstrap 5 기반
 
-<li><a class="text-white text-decoration-none" href="tools/calculator.html">계산기</a></li>
+<br>
 
-<li><a class="text-white text-decoration-none" href="tools/html-editor.html">HTML 편집기</a></li>
+GitHub Pages 지원
 
-</ul>
+<br>
+
+다크모드 지원
+
+</p>
 
 </div>
 
@@ -603,7 +982,7 @@ Bootstrap 5 기반으로 제작된 다양한 온라인 도구를
 
 <hr>
 
-<div class="text-center">
+<div class="text-center text-muted">
 
 © 2026 Online Tools
 
@@ -615,91 +994,198 @@ Bootstrap 5 기반으로 제작된 다양한 온라인 도구를
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="js/app.js"></script>
+
 <script>
 
-// 검색 기능
+const searchInput=document.getElementById("searchInput");
 
-const searchInput=document.querySelector("input[type=text]");
+const toolGrid=document.getElementById("toolGrid");
 
-searchInput.addEventListener("keyup",function(){
+const cards=[
+
+...toolGrid.querySelectorAll(".tool-card")
+
+];
+
+/* ===========================
+   검색
+=========================== */
+
+searchInput.addEventListener(
+
+"input",
+
+function(){
 
 const keyword=this.value.toLowerCase();
 
-document.querySelectorAll(".tool-card").forEach(card=>{
+cards.forEach(card=>{
 
 const text=card.innerText.toLowerCase();
 
-card.parentElement.style.display=text.includes(keyword)?"":"none";
+if(text.includes(keyword)){
 
-});
-
-});
-
-// 다크모드
-
-const darkBtn=document.querySelector(".btn-outline-light");
-
-let dark=false;
-
-darkBtn.onclick=function(){
-
-dark=!dark;
-
-if(dark){
-
-document.body.style.background="#181818";
-
-document.body.style.color="white";
-
-document.querySelector(".hero").style.background="#2b2b2b";
-
-document.querySelectorAll(".alert").forEach(a=>{
-
-a.style.background="#333";
-
-a.style.color="white";
-
-});
-
-darkBtn.innerHTML='<i class="bi bi-sun-fill"></i>';
+card.style.display="block";
 
 }else{
 
-document.body.style.background="#f5f5f5";
-
-document.body.style.color="black";
-
-document.querySelector(".hero").style.background="white";
-
-document.querySelectorAll(".alert").forEach(a=>{
-
-a.style.background="";
-
-a.style.color="";
-
-});
-
-darkBtn.innerHTML='<i class="bi bi-moon"></i>';
+card.style.display="none";
 
 }
 
-};
+});
 
-// 카드 애니메이션
+}
 
-document.querySelectorAll(".tool-card").forEach(card=>{
+);
 
-card.addEventListener("mouseenter",()=>{
+/* ===========================
+   등장 애니메이션
+=========================== */
 
-card.style.transform="translateY(-8px) scale(1.02)";
+cards.forEach((card,index)=>{
+
+card.style.opacity="0";
+
+card.style.transform="translateY(20px)";
+
+card.style.transition="all .35s ease";
+
+setTimeout(()=>{
+
+card.style.opacity="1";
+
+card.style.transform="translateY(0)";
+
+},index*40);
 
 });
 
-card.addEventListener("mouseleave",()=>{
+/* ===========================
+   클릭 효과
+=========================== */
 
-card.style.transform="translateY(0) scale(1)";
+cards.forEach(card=>{
+
+card.addEventListener("click",function(){
+
+this.style.transform="scale(.96)";
+
+setTimeout(()=>{
+
+this.style.transform="";
+
+},120);
 
 });
+
+});
+<!-- ===========================
+     카테고리(준비)
+=========================== -->
+
+const toolCount=document.getElementById("toolCount");
+
+if(toolCount){
+
+    toolCount.textContent=cards.length;
+
+}
+
+/* ===========================
+   검색창 ESC
+=========================== */
+
+searchInput.addEventListener(
+
+"keydown",
+
+function(e){
+
+    if(e.key==="Escape"){
+
+        this.value="";
+
+        cards.forEach(card=>{
+
+            card.style.display="";
+
+        });
+
+    }
+
+});
+
+/* ===========================
+   검색 결과 개수
+=========================== */
+
+function updateVisibleCount(){
+
+    let count=0;
+
+    cards.forEach(card=>{
+
+        if(card.style.display!=="none"){
+
+            count++;
+
+        }
+
+    });
+
+    if(toolCount){
+
+        toolCount.textContent=count;
+
+    }
+
+}
+
+searchInput.addEventListener(
+
+"input",
+
+updateVisibleCount
+
+);
+
+updateVisibleCount();
+
+/* ===========================
+   인기 도구(예시)
+=========================== */
+
+const popularTools=[
+
+"타이머",
+
+"스톱워치",
+
+"계산기"
+
+];
+
+console.log(
+
+"Popular:",
+
+popularTools.join(", ")
+
+);
+
+/* ===========================
+   최초 실행
+=========================== */
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+function(){
+
+    updateVisibleCount();
 
 });
 
