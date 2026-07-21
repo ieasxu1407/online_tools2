@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 3. Giscus 설정값 세팅 (본인 정보로 수정)
   script.setAttribute("data-repo", "ieasxu1407/online_tools2");
-  script.setAttribute("data-repo-id", "R_kgDOTNKxIg"");
-  script.setAttribute("data-category", "Q&A");
-  script.setAttribute("data-category-id", "DIC_kwDOTNKxIs4DBojd");
+  script.setAttribute("data-repo-id", "R_kgDOTNKxIg");
+  script.setAttribute("data-category", "General");
+  script.setAttribute("data-category-id", "DIC_kwDOTNKxIs4DBojc");
   script.setAttribute("data-mapping", "pathname");
   script.setAttribute("data-strict", "0");
   script.setAttribute("data-reactions-enabled", "1");
