@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   script.setAttribute("data-lang", "ko");
 
   // 4. 이전에 만든 Disqus 스타일 커스텀 CSS 주소 연결
-  script.setAttribute("data-theme", "https://ieasxu1407.github.io/css/giscus.css");
+  script.setAttribute("data-theme", "");
 
   // 5. 컨테이너 안에 스크립트 주입하여 실행
   commentContainer.appendChild(script);
