@@ -1,0 +1,57 @@
+/* 배경 */
+
+#loading-screen{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(255,255,255,.35);
+
+    backdrop-filter:blur(6px);
+
+    -webkit-backdrop-filter:blur(6px);
+
+    z-index:999999;
+
+}
+
+/* 가운데 박스 */
+
+.loading-box{
+
+    text-align:center;
+
+    background:#ffffff;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+
+}
+
+/* GIF */
+
+.loading-box img{
+
+    width:80px;
+
+}
+
+/* 글자 */
+
+.loading-box p{
+
+    margin-top:15px;
+
+    font-weight:bold;
+
+}
